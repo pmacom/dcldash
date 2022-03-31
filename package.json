@@ -1,6 +1,6 @@
 {
   "name": "dcldash",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "DCLconnect utility library",
   "main": "./dist/index.js",
   "scripts": {
@@ -18,7 +18,7 @@
     "library",
     "dclconnect"
   ],
-  "author": "-",
+  "author": "pmacom",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
