@@ -1,0 +1,1 @@
+export const Dash_GlobalCanvas = new UICanvas()

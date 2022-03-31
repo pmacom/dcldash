@@ -1,0 +1,5 @@
+export { OnUpdateFrame } from './utils/OnUpdateFrame'
+export { Dash_GlobalCanvas } from './utils/GlobalCanvas'
+export { Dash_Ease } from './utils/Ease'
+export { Dash_Wait } from './utils/AnimationQueue'
+export { Dash_AnimationQueue } from './utils/AnimationQueue'
