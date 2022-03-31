@@ -44,4 +44,4 @@ export class Dash_OnUpdateFrame_Controller implements ISystem {
     disable(){ if(this.system.active) engine.removeSystem(this) }
 }
 
-export const OnUpdateFrame = new Dash_OnUpdateFrame_Controller()
+export const Dash_OnUpdateFrame = new Dash_OnUpdateFrame_Controller()
