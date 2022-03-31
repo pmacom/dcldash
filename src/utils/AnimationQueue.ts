@@ -53,8 +53,3 @@ class AnimationQueue_Controller implements ISystem {
 }
 
 export const Dash_AnimationQueue = new AnimationQueue_Controller()
-
-export const Dash_Wait = (func: () => void, duration: number) => Dash_AnimationQueue.add({
-    duration,
-    onComplete: () => func()
-})
