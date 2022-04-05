@@ -27,11 +27,14 @@ class AnimationQueue_Controller implements ISystem {
     private nonce: number = 0
     private queue: typeof Map = new Map()
     constructor(){ this.system = this }
-    add(setting: Dash_AnimationQueue_Setting): Dash_AnimationQueue_Setting {
+    add(setting: Dash_AnimationQueue_Setting): Dash_AnimationQueue_Setting & {
+        reset: () => void
+    } {
         setting.id = this.nonce++
         this.queue.set(setting.id, setting)
         this.enable()
-        return setting
+        const reset = () => this.queue.get(setting.id).timer = 0;
+        return { reset, ...setting }
     }
     update(dt: number){
         if(!this.queue.size){ this.disable() }
