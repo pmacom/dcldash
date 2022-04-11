@@ -1,6 +1,6 @@
 {
   "name": "dcldash",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "DCLconnect utility library",
   "main": "./dist/index.js",
   "scripts": {
