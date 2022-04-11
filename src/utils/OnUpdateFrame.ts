@@ -13,7 +13,7 @@ declare const Map: any
 export interface Dash_OnUpdateFrame_Setting {
     id?: number
     data?: any
-    onFrame?: (data: any) => void
+    onFrame?: (data: any, dt: number) => void
 }
 
 export interface Dash_OnUpdateFrame_Instance {
@@ -37,7 +37,7 @@ export class Dash_OnUpdateFrame_Controller implements ISystem {
         if(!this.queue.size){ this.disable() }
         this.queue.forEach((setting: Dash_OnUpdateFrame_Setting) => {
             const { id, onFrame, data } = setting
-            if(onFrame){ onFrame(data) }
+            if(onFrame){ onFrame(data, dt) }
         })
     }
     enable(){ if(!this.system.active) engine.addSystem(this) }

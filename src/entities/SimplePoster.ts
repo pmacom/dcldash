@@ -22,7 +22,6 @@ export class SimplePoster extends Entity {
         this.addComponent(this.material)
         this.addComponent(new Transform())
         this.shape.uvs = Dash_UV_Image()
-        engine.addEntity(this)
     }
 
     setHyperlink(src: string){
@@ -42,4 +41,7 @@ export class SimplePoster extends Entity {
         this.material.emissiveIntensity = 1
         this.addComponentOrReplace(this.material)
     }
+
+    show(){ if(!this.alive) engine.addEntity(this) }
+    hide(){ if(this.alive) engine.removeEntity(this) }
 }
