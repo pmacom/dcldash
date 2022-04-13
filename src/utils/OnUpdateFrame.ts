@@ -27,7 +27,7 @@ export class Dash_OnUpdateFrame_Controller implements ISystem {
     private nonce: number = 0
     private queue: typeof Map = new Map()
     constructor(){ this.system = this }
-    add(onFrame: (data: any) => void, data?: any): Dash_OnUpdateFrame_Instance {
+    add(onFrame: (data: any, dt: number) => void, data?: any): Dash_OnUpdateFrame_Instance {
         const setting = { id: this.nonce++, onFrame, data }
         const start = () => { this.queue.set(setting.id, setting); this.enable()}
         const stop = () => { this.queue.delete(setting.id)}
