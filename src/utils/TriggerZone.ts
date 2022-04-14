@@ -43,6 +43,9 @@ export class TriggerZone extends Entity {
         this.debug = new TriggerDebug(this)
         this.debug.show()
     }
+
+    enable(){this.checkCollision.start()}
+    disable(){ this.checkCollision.stop()}
 }
 
 class TriggerDebug extends Entity {
@@ -63,13 +66,11 @@ class TriggerDebug extends Entity {
     }
 
     showHighlight(){
-        log('showing material')
         this.material = Dash_Material.opaqueGreen()
         this.addComponentOrReplace(this.material)
     }
 
     hideHighlight(){
-        log('hiding material')
         this.material = Dash_Material.opaqueRed()
         this.addComponentOrReplace(this.material)
     }
