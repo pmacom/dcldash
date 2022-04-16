@@ -8,6 +8,7 @@
   "compilerOptions": {
     "target": "es6",
     "module": "ESNext",
+    "declaration": true,
     "moduleResolution": "classic",
     "pretty": true,
     "forceConsistentCasingInFileNames": true,
