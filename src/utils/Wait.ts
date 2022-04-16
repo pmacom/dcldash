@@ -1,4 +1,4 @@
-import { Dash_AnimationQueue } from "../index";
+import { Dash_AnimationQueue } from "./AnimationQueue"
 
 /**
  * Usage

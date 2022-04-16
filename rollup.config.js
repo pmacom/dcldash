@@ -12,10 +12,9 @@ export default {
   output: [
     {
       file: packageJson.main,
-      format: 'amd',
-      amd: {
-        id: packageJson.name
-      },
+      format: 'es',
+      name: 'dcldash',
+      sourcemap: false,
     },
   ],
   plugins: [
@@ -23,7 +22,9 @@ export default {
       preferBuiltins: false,
       browser: true
     }),
-    typescript({ tsconfig: './tsconfig.json' }),
+    typescript({
+      tsconfig: './tsconfig.json',
+    }),
     commonjs({
       exclude: 'node_modules',
       ignoreGlobal: true,

@@ -16,12 +16,10 @@
     "experimentalDecorators": true,
     "downlevelIteration": true,
     "keyofStringsOnly": true,
-    "inlineSourceMap": true,
     "sourceMap": false,
     "removeComments": false,
-    "inlineSources": true,
     "useDefineForClassFields": false,
-    "outDir": "types",
+    "outDir": ".",
     "allowJs": true,
     "types": [
       "./node_modules/decentraland-ecs/types/env",

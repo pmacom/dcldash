@@ -1,4 +1,4 @@
-import { Dash_UV_Image } from "../index"
+import { Dash_UV_Image } from '../utils/Uvs'
 
 /**
     Usage:
