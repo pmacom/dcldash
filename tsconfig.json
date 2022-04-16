@@ -21,6 +21,7 @@
     "removeComments": false,
     "inlineSources": true,
     "useDefineForClassFields": false,
+    "outDir": "dist",
     "allowJs": true,
     "types": [
       "./node_modules/decentraland-ecs/types/env",
