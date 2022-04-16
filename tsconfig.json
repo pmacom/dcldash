@@ -7,7 +7,7 @@
   ],
   "compilerOptions": {
     "target": "es6",
-    "module": "amd",
+    "module": "ESNext",
     "moduleResolution": "classic",
     "pretty": true,
     "forceConsistentCasingInFileNames": true,
