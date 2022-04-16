@@ -6,11 +6,37 @@
     "dist"
   ],
   "compilerOptions": {
-    "module": "ESNext",
-    "removeComments": true,
-    "declaration": true,
-    "declarationDir": ".",
-    "outDir": "dist"
+    "target": "es6",
+    "module": "amd",
+    "moduleResolution": "classic",
+    "pretty": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "downlevelIteration": true,
+    "keyofStringsOnly": true,
+    "inlineSourceMap": true,
+    "sourceMap": false,
+    "removeComments": false,
+    "inlineSources": true,
+    "useDefineForClassFields": false,
+    "allowJs": true,
+    "types": [
+      "./node_modules/decentraland-ecs/types/env",
+      "./node_modules/decentraland-ecs/types/dcl",
+      "./node_modules/decentraland-ecs/types/@decentraland/EthereumController",
+      "./node_modules/decentraland-ecs/types/@decentraland/SocialController",
+      "./node_modules/decentraland-ecs/types/@decentraland/Identity",
+      "./node_modules/decentraland-ecs/types/@decentraland/web3-provider",
+      "./node_modules/decentraland-ecs/types/@decentraland/EnvironmentAPI",
+      "./node_modules/decentraland-ecs/types/@decentraland/ParcelIdentity",
+      "./node_modules/decentraland-ecs/types/@decentraland/PortableExperiences",
+      "./node_modules/decentraland-ecs/types/@decentraland/RestrictedActions",
+      "./node_modules/decentraland-ecs/types/@decentraland/SignedFetch",
+      "./node_modules/decentraland-ecs/types/@decentraland/Players"
+    ],
+    "typeRoots": [
+      "."
+    ]
   },
-  "extends": "./node_modules/decentraland-ecs/types/tsconfig.json"
 }
