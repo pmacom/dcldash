@@ -13,7 +13,6 @@ export default {
     {
       file: packageJson.main,
       format: 'es',
-      name: 'dcldash',
       sourcemap: false,
     },
   ],
