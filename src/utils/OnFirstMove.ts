@@ -1,5 +1,5 @@
-import { Dash_OnUpdateFrame } from "../index"
-import { Dash_Wait } from "../index"
+import { Dash_OnUpdateFrame } from "./OnUpdateFrame"
+import { Dash_Wait } from "./Wait"
 
 const getPositionData = () => {
     let { feetPosition, position, rotation } = Camera.instance

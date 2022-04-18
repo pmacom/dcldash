@@ -8,6 +8,7 @@
   "compilerOptions": {
     "target": "es6",
     "module": "ESNext",
+    "declaration": true,
     "moduleResolution": "classic",
     "pretty": true,
     "forceConsistentCasingInFileNames": true,
@@ -15,11 +16,10 @@
     "experimentalDecorators": true,
     "downlevelIteration": true,
     "keyofStringsOnly": true,
-    "inlineSourceMap": true,
     "sourceMap": false,
     "removeComments": false,
-    "inlineSources": true,
     "useDefineForClassFields": false,
+    "outDir": ".",
     "allowJs": true,
     "types": [
       "./node_modules/decentraland-ecs/types/env",

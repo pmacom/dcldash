@@ -1,4 +1,4 @@
-import { Dash_OnUpdateFrame, Dash_OnUpdateFrame_Instance } from "../index"
+import { Dash_OnUpdateFrame, Dash_OnUpdateFrame_Instance } from "./OnUpdateFrame"
 
 export class Countdown {
     private remaining: number = 0
