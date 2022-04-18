@@ -39,7 +39,7 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-typescript2": "^0.31.2"
   },
-  "types": "dist/types/index.d.ts",
+  "types": "dist/index.d.ts",
   "engines": {
     "node": ">=16.0.0",
     "npm": ">=8.0.0",
