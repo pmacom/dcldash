@@ -22,8 +22,8 @@
     "outDir": ".",
     "allowJs": true,
     "types": [
-      "node_modules/decentraland-ecs/types/env",
-      "node_modules/decentraland-ecs/types/dcl",
+      "node_modules/decentraland-ecs/types/@decentraland/env",
+      "node_modules/decentraland-ecs/types/@decentraland/dcl",
       "node_modules/decentraland-ecs/types/@decentraland/EthereumController",
       "node_modules/decentraland-ecs/types/@decentraland/SocialController",
       "node_modules/decentraland-ecs/types/@decentraland/Identity",
