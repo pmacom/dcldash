@@ -1,43 +1,33 @@
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import typescript from '@rollup/plugin-typescript';
+import { terser } from 'rollup-plugin-terser';
 
-import resolve from 'rollup-plugin-node-resolve'
-// import commonjs from 'rollup-plugin-commonjs'
-// import copy from 'rollup-plugin-copy'
-import { terser } from 'rollup-plugin-terser'
-import { sys } from 'typescript'
-import typescript from 'rollup-plugin-typescript2'
-
+const packageJson = require('./package.json');
 const PROD = !!process.env.CI
 
-console.log(`production: ${PROD}`)
-const packageJsonPath = sys.resolvePath('./package.json')
-const packageJson = JSON.parse(sys.readFile(packageJsonPath))
-
-const plugins = [
-  typescript({
-    verbosity: 2,
-    rollupCommonJSResolveHack: false,
-    clean: true,
-  }),
-  resolve({
-    browser: true,
-    preferBuiltins: false
-  }),
-  PROD && terser({})
-]
-
 export default {
-  input: './src/index.ts',
+  input: 'src/index.ts',
   context: 'globalThis',
-  plugins,
   output: [
     {
-      file: './dist/index.js',
+      file: packageJson.main,
       format: 'amd',
-      name: 'dclconnect',
-      sourcemap: true,
       amd: {
-        id: 'dclconnect'
-      }
-    }
-  ]
-}
+        id: packageJson.name
+      },
+    },
+  ],
+  plugins: [
+    resolve({
+      preferBuiltins: false,
+      browser: true
+    }),
+    typescript({ tsconfig: './tsconfig.json' }),
+    commonjs({
+      exclude: 'node_modules',
+      ignoreGlobal: true,
+    }),
+    PROD && terser({ format: { comments: false } }),
+  ],
+};

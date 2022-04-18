@@ -44,8 +44,8 @@ export class TriggerZone extends Entity {
         this.debug.show()
     }
 
-    enable(){this.checkCollision.start()}
-    disable(){ this.checkCollision.stop()}
+    enable(){this.checkCollision?.start()}
+    disable(){ this.checkCollision?.stop()}
 }
 
 class TriggerDebug extends Entity {

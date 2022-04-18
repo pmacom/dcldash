@@ -1,12 +1,14 @@
 import { Dash_OnUpdateFrame, Dash_OnUpdateFrame_Instance } from "./OnUpdateFrame"
 
-export class Countdown {
+declare const Set: any
+
+export class Dash_Countdown {
     private remaining: number = 0
     private timer: Dash_OnUpdateFrame_Instance
     private seconds: number = 0
-    private onCompleteMap: Set<()=>void> = new Set()
-    private onUpdateMap: Set<(dt: number)=>void> = new Set()
-    private onSecondMap: Set<(seconds: number)=>void> = new Set()
+    private onCompleteMap: typeof Set = new Set()
+    private onUpdateMap: typeof Set = new Set()
+    private onSecondMap: typeof Set = new Set()
 
     constructor(){
         this.timer = Dash_OnUpdateFrame.add((data: any, dt: number) => this.onFrame(data, dt))
