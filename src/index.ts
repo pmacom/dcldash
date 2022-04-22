@@ -21,5 +21,6 @@ export {
     Dash_UV_Curved_Video,
     Dash_UV_Image,
     Dash_UV_Video,
-    Dash_UV_Crop_Image,
+    Dash_UV_UI_Crop_Image,
+    Dash_UV_Plane_Crop_Image,
 } from './utils/Uvs'
