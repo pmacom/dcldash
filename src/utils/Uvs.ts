@@ -45,7 +45,7 @@ export const Dash_UV_Crop_Video = (
     return [...uv, ...uv]
 }
 
-export const Dash_UV_Crop_Image = (
+export const Dash_UV_UI_Crop_Image = (
     imageWidth: number,
     imageHeight: number,
     cropWidth: number,
@@ -64,7 +64,7 @@ export const Dash_UV_Crop_Image = (
     let bl = { x: x+w,  y: 1-y-h    }
     let br = { x: x,    y: 1-y-h    }
 
-    let uvs = isFlipped ? [
+    let uv = isFlipped ? [
         bl.x,        bl.y,
         br.x,        br.y,
         tr.x,        tr.y,
@@ -76,5 +76,39 @@ export const Dash_UV_Crop_Image = (
         bl.x,        bl.y,
     ]
 
-    return uvs
+    return [...uv, ...uv]
+}
+
+export const Dash_UV_Plane_Crop_Image = (
+    imageWidth: number,
+    imageHeight: number,
+    cropWidth: number,
+    cropHeight: number,
+    cropSourceX: number,
+    cropSourceY: number,
+    isFlipped?: boolean, // Sometimes I want it to be upside down. I guess.
+) : Array<number> => {
+    let x = Scalar.InverseLerp(0, imageWidth, cropSourceX)
+    let y = Scalar.InverseLerp(0, imageHeight, cropSourceY)
+    let w = Scalar.InverseLerp(0, imageWidth, cropWidth)
+    let h = Scalar.InverseLerp(0, imageHeight, cropHeight)
+
+    let tr = { x: x,    y: 1-y      }
+    let tl = { x: x+w,  y: 1-y      }
+    let bl = { x: x+w,  y: 1-y-h    }
+    let br = { x: x,    y: 1-y-h    }
+
+    let uv = isFlipped ? [
+        tr.x,        tr.y,
+        tl.x,        tl.y,
+        bl.x,        bl.y,
+        br.x,        br.y,
+    ]:[
+        br.x,        br.y,
+        bl.x,        bl.y,
+        tl.x,        tl.y,
+        tr.x,        tr.y,
+    ]
+
+    return [...uv, ...uv]
 }
