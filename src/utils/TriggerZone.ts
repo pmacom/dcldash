@@ -3,7 +3,7 @@ import { Dash_CheckWithinVolume } from "../index"
 import { Dash_Material } from "../index"
 import { Dash_OnUpdateFrame_Instance } from "../index"
 
-export class TriggerZone extends Entity {
+export class Dash_TriggerZone extends Entity {
     private debug: TriggerDebug | undefined
     private checkCollision: Dash_OnUpdateFrame_Instance | undefined
     public onEnter: () => void = () => {}

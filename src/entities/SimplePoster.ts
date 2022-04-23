@@ -10,7 +10,7 @@ import { Dash_UV_Image } from '../utils/Uvs'
     sp.setHyperlink('http://www.google.com')
 */
 
-export class SimplePoster extends Entity {
+export class Dash_SimplePoster extends Entity {
     private shape: PlaneShape = new PlaneShape()
     private material: Material = new Material()
     private texture: Texture | undefined
