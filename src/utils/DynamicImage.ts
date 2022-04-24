@@ -108,6 +108,44 @@ export class DynamicImage {
         this.animation.start()
     }
 
+    moveToX(
+        x: number | string,
+        duration: number,
+        ease?: (n: number) => number,
+        callback?: () => void
+    ){
+        this.tweens.set('positionX', {
+            timer: 0,
+            settings: {
+                from: this.image.positionX,
+                to: x,
+                duration,
+                ease,
+                callback,
+            }
+        })
+        this.animation.start()
+    }
+
+    moveToY(
+        y: number | string,
+        duration: number,
+        ease?: (n: number) => number,
+        callback?: () => void
+    ){
+        this.tweens.set('positionY', {
+            timer: 0,
+            settings: {
+                from: this.image.positionY,
+                to: y,
+                duration,
+                ease,
+                callback,
+            }
+        })
+        this.animation.start()
+    }
+
     moveRelativeTo(
         x: number | string,
         y: number | string,
@@ -168,6 +206,44 @@ export class DynamicImage {
         this.animation.start()
     }
 
+    resizeWidthTo(
+        width: number | string,
+        duration: number,
+        ease?: (n: number) => number,
+        callback?: () => void
+    ){
+        this.tweens.set('width', {
+            timer: 0,
+            settings: {
+                from: this.image.width,
+                to: width,
+                duration,
+                ease,
+                callback,
+            }
+        })
+        this.animation.start()
+    }
+
+    resizeHeightTo(
+        height: number | string,
+        duration: number,
+        ease?: (n: number) => number,
+        callback?: () => void
+    ){
+        this.tweens.set('height', {
+            timer: 0,
+            settings: {
+                from: this.image.height,
+                to: height,
+                duration,
+                ease,
+                callback,
+            }
+        })
+        this.animation.start()
+    }
+
     moveSourceTo(
         x: number,
         y: number,
@@ -185,6 +261,44 @@ export class DynamicImage {
                 callback,
             }
         })
+        this.tweens.set('sourceTop', {
+            timer: 0,
+            settings: {
+                from: this.image.sourceTop,
+                to: y,
+                duration,
+                ease,
+                callback,
+            }
+        })
+        this.animation.start()
+    }
+
+    moveSourceLeftTo(
+        x: number,
+        duration: number,
+        ease?: (n: number) => number,
+        callback?: () => void
+    ){
+        this.tweens.set('sourceLeft', {
+            timer: 0,
+            settings: {
+                from: this.image.sourceLeft,
+                to: x,
+                duration,
+                ease,
+                callback,
+            }
+        })
+        this.animation.start()
+    }
+
+    moveSourceTopTo(
+        y: number,
+        duration: number,
+        ease?: (n: number) => number,
+        callback?: () => void
+    ){
         this.tweens.set('sourceTop', {
             timer: 0,
             settings: {
@@ -228,6 +342,43 @@ export class DynamicImage {
         this.animation.start()
     }
 
+    resizeSourceWidthTo(
+        width: number,
+        duration: number,
+        ease?: (n: number) => number,
+        callback?: () => void
+    ){
+        this.tweens.set('sourceWidth', {
+            timer: 0,
+            settings: {
+                from: this.image.sourceWidth,
+                to: width,
+                duration,
+                ease,
+                callback,
+            }
+        })
+        this.animation.start()
+    }
+
+    resizeSourceHeightTo(
+        height: number,
+        duration: number,
+        ease?: (n: number) => number,
+        callback?: () => void
+    ){
+        this.tweens.set('sourceHeight', {
+            timer: 0,
+            settings: {
+                from: this.image.sourceHeight,
+                to: height,
+                duration,
+                ease,
+                callback,
+            }
+        })
+        this.animation.start()
+    }
 
     scaleIn(
         startScale: number | string,
@@ -375,6 +526,7 @@ export class DynamicImage {
                         if(tween.timer >= duration){ this.image[name] = from.type == 1 || to.type == 1 ? to.value : `${to.value}%`; break }
                         value = settings.ease ? settings.ease(tween.timer/duration) : tween.timer/duration
                         amount = Scalar.Lerp(from.value, to.value, value)
+                        log(from.type == 1, to.type == 1)
                         this.image[name] = from.type == 1 || to.type == 1 ? amount: `${amount}%`
                         break
                 }
