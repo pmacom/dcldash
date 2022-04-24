@@ -5,6 +5,7 @@
 
 export { Dash_TriggerZone } from './utils/TriggerZone'
 export { DynamicImage } from './utils/DynamicImage'
+export { DynamicImageBar } from './utils/DynamicImageBar'
 export { Dash_Countdown } from './utils/Countdown'
 export { Dash_SimplePoster } from './entities/SimplePoster'
 
