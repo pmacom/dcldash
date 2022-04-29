@@ -16,6 +16,7 @@ export const Dash_OnFirstMove = (callback: () => void) => {
                 onUpdateFrame.stop()
             }
         }, { initialPosition })
+        onUpdateFrame.start()
     },1)
 }
 

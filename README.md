@@ -1,75 +1,76 @@
-## SDK Library
+#dcldash
 
-This project has the basics to start building your own library for using in Decentraland scenes.
+A bundle of helper functions that simplify some of the more time consuming and repetitive tasks developers tend to do in the Decentraland SDK
 
-The libraries in the [Awesome Repository](https://github.com/decentraland-scenes/Awesome-Repository#Libraries) are available for all to use. We encourage you to create and share your own as well, we'd love to see the community grow and start sharing more reusable solutions to common problems through libraries!
+##Installation
 
-## Publish
+`npm install -b dcldash@latest`
 
-See [Create Libraries]() for tips on how to design and develop your library, and for simple instructions for publishing it to NPM.
+## Debug
 
-Below is a template to help you craft documentation for your library, so others know how to use it.
+### Tweaker
 
-# MyAmazingLibrary Documentation
+**Purpose:** A graphical UI for adjusting the Transform of any Entity in your scene
 
-myAmazingLibrary includes helpful solutions for `< insert use case >` in a Decentraland scene.
+### ZoneCreator
 
-## Install
+**Purpose:** Drop a zone creation cube into the scene and then move around the area to define the size of the zone. Then click a button to export the Transform information for that zone
 
-To use any of the helpers provided by this library:
+## Entities
 
-1. Install it as an npm package. Run this command in your scene's project folder:
+### SimplePoster
 
-   ```
-   npm install myAmazingLibrary
-   ```
+**Purpose:** A very simple poster that allows you to pass along a src and hyperlink (clickable event) to go to a specific URL (optional)
 
-2. Add this line at the start of your game.ts file, or any other TypeScript files that require it:
+### TriggerZone
 
-   ```ts
-   import * as magic from 'myAmazingLibrary'
-   ```
+**Purpose:** Easily create a triggerZone with a more intuitive visual cue (debug mode) for when a user enters/leaves the zone
 
-## Usage
+## Animations
 
-### < use case 1 >
+### AnimationQueue
 
-To do `< insert use case >`, add the `MyAmazingComponent` component to the entity.
+**Purpose:** Quickly create a simple animation without having to create a new ISystem
 
-MyAmazingComponent requires two arguments when being constructed:
+### OnUpdateFrame
 
-- `start`: Vector3 for the start position
-- `duration`: duration (in seconds)
+**Purpose:** Simplify your animations/physics code by creating togglable onUpdateFrame functions.
 
-MyAmazingComponent can optionally also take the following argument:
+### DynamicImage
 
-- `color`: Color4 value for the color. If not provided, the default value is `Color4.Red()`
+**Purpose:** Animate UIImage size, position and cropping with ease
 
-This example uses MyAmazingComponent to do `< insert use case >` to an entity over a period of 2 seconds:
+### DynamicImageBar
 
-```ts
-import * as magic from 'myAmazingLibrary'
+**Purpose:** A very fast, performant and easy to implement image progress bar
 
-// Create entity
-const box = new Entity()
+## Materials
 
-// Give entity a shape and transform
-box.addComponent(new BoxShape())
-box.addComponent(new Transform())
+**Purpose:** Easily implement common materials for testing and debugging purposes
 
-// Move entity
-box.addComponent(new magic.MyAmazingComponent(new Vector3(1, 1, 1), 2))
+## Utils
 
-// Add entity to engine
-engine.addEntity(box)
-```
+### Wait
 
-> Note: Be aware that if < other use case >, MyAmazingComponent will < do some other thing >.
+**Purpose:** Sometimes you want to call a setTimeout function anywhere within your code and not just add it as a component to an entity
 
-### < use case 2 >
+### UVs
 
-...
+**Purpose:** When you attach a video or image material to a primative shape (BoxShape, PlaneShape, ect) the rotation of the texture will be rotated or flipped incorrectly. Instead of rotating the entire entity, you can leverage one of these functions to just alter the UVmap for how the material is applied to the entity.
 
-## Copyright info
+### OnFirstMove
 
-This scene is protected with a standard Apache 2 licence. See the terms and conditions in the [LICENSE](/LICENSE) file.
+**Purpose:** The webbrowser instance of decentraland requires that you interact with the site before a video or audio file will play. Adding any video/audio play events to an onFirstMove will ensure that it plays more consistently
+
+### GlobalCanvas
+
+**Purpose:** Generating a new `UICanvas` more than once is not preferred for performance purposes. Use the globalcanvas whenever possible instead of generating a new one each time
+
+### Ease
+
+**Purpose:** Easily add ease animations to your AnimationQueues and DynamicImages
+
+### Countdown
+
+**Purpose:** Invoke a countdown event that allows you to listen for every frame or every second with a callback function when it is completed
+
