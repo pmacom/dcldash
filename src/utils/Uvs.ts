@@ -15,13 +15,11 @@ export const Dash_UV_Curved_Image = (sliceCount: number, sliceIndex: number): nu
 }
 
 export const Dash_UV_Video = () => {
-    const uv = [ 1,0, 0,0, 0,1, 1,1 ]
-    return [...uv, ...uv]
+    return [ 0,1, 1,1, 1,0, 0,0, 1,1, 0,1, 0,0, 1,0 ]
 }
 
 export const Dash_UV_Image = () => {
-    const uv = [ 1,0, 0,0, 0,1, 1,1 ]
-    return [...uv, ...uv]
+    return [ 1,0, 0,0, 0,1, 1,1, 0,0, 1,0, 1,1, 0,1 ]
 }
 
 export const Dash_UV_Crop_Video = (
