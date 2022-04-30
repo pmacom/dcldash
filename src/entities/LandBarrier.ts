@@ -2,7 +2,7 @@ import { Dash_OnUpdateFrame_Instance, Dash_OnUpdateFrame } from '../utils/OnUpda
 import { Dash_Material } from '../utils/Materials'
 import { Dash_UV_Plane_Crop_Image } from '../utils/Uvs'
 import { movePlayerTo } from "@decentraland/RestrictedActions"
-import { Dash_TriggerZone } from '../index'
+import { Dash_TriggerZone } from '../utils/TriggerZone'
 
 /**
  * Usage - new LandBarrier(baseParcel, parcels)
@@ -122,10 +122,8 @@ const BarrierImageData: IBarrierImageData = {
 
 export class Dash_LandBarrier {
     private base: Vector2
-    private parcelsCoords: Vector2[]
+    // private parcelsCoords: Vector2[]
     private barrierZones: BarrierZone[] = []
-    private parcelXs: typeof Set = new Set()
-    private parcelYs: typeof Set = new Set()
     private parcelStrings: typeof Set = new Set()
 
     constructor(
@@ -133,66 +131,34 @@ export class Dash_LandBarrier {
         private parcels: string[],
         public exitLocation: Vector3,
     ){
-        this.base = this.getParcelCoordinates(baseParcel)
-        this.parcelsCoords = parcels.map((parcel: string) => this.getParcelCoordinates(parcel, true))
-        this.parcelsCoords.forEach((parcel: Vector2, index: number) => {
-            if(index == 0){
-                this.getNeighboringParcels(parcel)
-            }
-            const neighbors = this.getNeighboringParcels(parcel)
+        const baseCoords = baseParcel.split(',')
+        this.base = new Vector2(parseInt(baseCoords[0]), parseInt(baseCoords[1]))
+        this.parcels.forEach(parcel => this.parcelStrings.add(parcel))
+        this.parcels.forEach((parcel: string, index: number) => {
+            const c = parcel.split(',')
+            const coords = new Vector2(parseInt(c[0]), parseInt(c[1]))
+            const diff = new Vector2(coords.x-this.base.x, coords.y-this.base.y)
+            const position = new Vector3((diff.x*16)+8, 1,(diff.y*16)+8)
+            const north = !this.parcelStrings.has(`${coords.x-1},${coords.y}`)
+            const south = !this.parcelStrings.has(`${coords.x+1},${coords.y}`)
+            const east = !this.parcelStrings.has(`${coords.x},${coords.y+1}`)
+            const west = !this.parcelStrings.has(`${coords.x},${coords.y-1}`)
             const barrierZone = new BarrierZone(
                 BarrierMaterial,
                 'accountrequired',
                 this.exitLocation,
-                neighbors[0],
-                neighbors[1],
-                neighbors[2],
-                neighbors[3],
+                north,
+                south,
+                east,
+                west,
             )
-            barrierZone.getComponent(Transform).position.set(
-                ((parcel.x-1)*16)-8,
-                1,
-                ((parcel.y)*16)-8
-            )
+            barrierZone.addComponentOrReplace(new Transform({ position }))
             this.barrierZones.push(barrierZone)
         })
     }
 
     setMessage(message: string){
         this.barrierZones.forEach(barrier => barrier.setMessage(message))
-    }
-
-    getParcelCoordinates(coords: string, offset?: boolean): Vector2 {
-        const c = coords.split(',')
-        const x = parseInt(c[0])
-        const y = parseInt(c[1])
-        let parcel = new Vector2()
-        if(offset){
-            parcel.x = x-this.base.x
-            parcel.y = y-this.base.y
-            this.parcelXs.add(parcel.x)
-            this.parcelYs.add(parcel.y)
-            this.parcelStrings.add(`${parcel.x},${parcel.y}`)
-        }else{
-            parcel.x = x
-            parcel.y = y
-        }
-        return parcel
-    }
-
-    getNeighboringParcels(parcel: Vector2): boolean[]{
-        const dir = {
-            north: !this.parcelStrings.has(`${parcel.x},${parcel.y-1}`),
-            south: !this.parcelStrings.has(`${parcel.x},${parcel.y+1}`),
-            east: !this.parcelStrings.has(`${parcel.x+1},${parcel.y}`),
-            west: !this.parcelStrings.has(`${parcel.x-1},${parcel.y}`),
-        }
-        return [
-            dir.west,
-            dir.east,
-            dir.south,
-            dir.north,
-        ]
     }
 
     disable(){
