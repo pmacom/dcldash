@@ -18,10 +18,27 @@ export class Dash_TriggerZone extends Entity {
     }
 
     private check(){
+        let p = this.getParent()
+        let t = new Vector3()
+        let s = new Vector3()
+        let r = new Quaternion()
+
+        do {
+            if(p){
+                let localTransform = p.getComponentOrCreate(Transform)
+                t.addInPlace(localTransform.position.clone())
+                s.addInPlace(localTransform.scale.clone())
+                r.eulerAngles.addInPlace(localTransform.eulerAngles)
+                p = p.getParent()
+            }
+        } while (p && p.uuid !== '0')
+  
         const transform = this.getComponentOrCreate(Transform)
+
+        this.getParent()
         const withinVolume = Dash_CheckWithinVolume(
-            transform.position,
-            transform.scale,
+            Vector3.Add(t, transform.position),
+            Vector3.Add(s, transform.scale),
             new Vector3(
                 Camera.instance.feetPosition.x,
                 Camera.instance.feetPosition.y,
