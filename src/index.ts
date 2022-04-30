@@ -8,6 +8,7 @@ export { DynamicImage } from './utils/DynamicImage'
 export { DynamicImageBar } from './utils/DynamicImageBar'
 export { Dash_Countdown } from './utils/Countdown'
 export { Dash_SimplePoster } from './entities/SimplePoster'
+export { Dash_LandBarrier } from './entities/LandBarrier'
 
 export { Dash_AnimationQueue } from './utils/AnimationQueue'
 export { Dash_OnUpdateFrame, Dash_OnUpdateFrame_Instance } from './utils/OnUpdateFrame'
