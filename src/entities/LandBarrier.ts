@@ -1,12 +1,13 @@
 import { Dash_OnUpdateFrame_Instance, Dash_OnUpdateFrame } from '../utils/OnUpdateFrame'
 import { Dash_Material } from '../utils/Materials'
 import { Dash_UV_Plane_Crop_Image } from '../utils/Uvs'
+import { movePlayerTo } from "@decentraland/RestrictedActions"
+import { Dash_TriggerZone } from '../index'
 
 /**
  * Usage - new LandBarrier(baseParcel, parcels)
  *
-    
-    const landBarrier = new LandBarrier("-49,-100", [
+    const landBarrier = new Dash_LandBarrier("-49,-100", [
         "-46,-99",
         "-47,-99",
         "-48,-99",
@@ -14,7 +15,22 @@ import { Dash_UV_Plane_Crop_Image } from '../utils/Uvs'
         "-47,-100",
         "-48,-100",
         "-49,-100",
-    ])
+    ], new Vector3(0, 0, -16.1))
+
+    landBarrier.enable()
+    landBarrier.disable()
+    landBarrier.setMessage("comingsoon")
+
+    // Message Types
+    comingsoon
+    privateevent
+    accountrequired
+    nftrequired
+    temporarilylocked
+    outdated
+    undermaintenance
+    loadfully
+    transparent
  */
 
 declare const Set: any
@@ -37,7 +53,7 @@ const BarrierMaterial = material
 const sourceWidth = 1024
 const sourceHeight = 86
 
-interface IBarrierImageData {
+export interface IBarrierImageData {
     [key: string]: {
         sourcePositionTop: number
         sourcePositionLeft: number
@@ -112,9 +128,12 @@ export class Dash_LandBarrier {
     private parcelYs: typeof Set = new Set()
     private parcelStrings: typeof Set = new Set()
 
-    constructor(baseParcel: string, private parcels: string[]){
+    constructor(
+        baseParcel: string,
+        private parcels: string[],
+        public exitLocation: Vector3,
+    ){
         this.base = this.getParcelCoordinates(baseParcel)
-
         this.parcelsCoords = parcels.map((parcel: string) => this.getParcelCoordinates(parcel, true))
         this.parcelsCoords.forEach((parcel: Vector2, index: number) => {
             if(index == 0){
@@ -124,10 +143,11 @@ export class Dash_LandBarrier {
             const barrierZone = new BarrierZone(
                 BarrierMaterial,
                 'accountrequired',
-                neighbors[0], // north,
-                neighbors[1], // south,
-                neighbors[2], // east,
-                neighbors[3], // west,
+                this.exitLocation,
+                neighbors[0],
+                neighbors[1],
+                neighbors[2],
+                neighbors[3],
             )
             barrierZone.getComponent(Transform).position.set(
                 ((parcel.x-1)*16)-8,
@@ -174,17 +194,33 @@ export class Dash_LandBarrier {
             dir.north,
         ]
     }
+
+    disable(){
+        this.barrierZones.forEach(barrierZone => {
+            barrierZone.disable()
+            if(barrierZone.alive) engine.removeEntity(barrierZone)
+        })
+    }
+
+    enable(){
+        this.barrierZones.forEach(barrierZone => {
+            barrierZone.enable()
+            if(!barrierZone.alive) engine.addEntity(barrierZone)
+        })
+    }
 }
 
 class BarrierZone extends Entity {
-    private collider: Entity = new Entity()
-    private colliderShape: BoxShape = new BoxShape()
     private shapes: PlaneShape[] = []
     public animation: Dash_OnUpdateFrame_Instance
+    private collider: Entity = new Entity()
+    private colliderShape: BoxShape = new BoxShape()
+    private triggerZone: Dash_TriggerZone = new Dash_TriggerZone()
 
     constructor(
         public material: Material,
         private message: string = 'privateevent',
+        public exitLocation: Vector3,
         showNorth?: boolean,
         showSouth?: boolean,
         showEast?: boolean,
@@ -195,10 +231,19 @@ class BarrierZone extends Entity {
         this.collider.addComponent(this.colliderShape)
         this.collider.addComponent(Dash_Material.transparent())
         this.collider.addComponent(new Transform({
-            position: new Vector3(0,8,0),
-            scale: new Vector3(16,16,16)
+            scale: new Vector3(16, 8, 16)
         }))
         this.collider.setParent(this)
+
+        this.triggerZone.addComponent(new Transform({
+            position: new Vector3(0,7,0),
+            scale: new Vector3(16,16,16)
+        }))
+        this.triggerZone.onEnter = () => {
+            const { x, y, z } = this.exitLocation
+            movePlayerTo({ x, y, z })
+        }
+        this.triggerZone.setParent(this)
 
         this.addComponent(new Transform({
             position: new Vector3(0,0,0),
@@ -258,6 +303,10 @@ class BarrierZone extends Entity {
             }
         })
     }
+
+    setExitLocation(exitLocation: Vector3){ this.exitLocation = exitLocation }
+    disable(){ this.triggerZone.disable() }
+    enable(){ this.triggerZone.enable() }
 }
 
 
