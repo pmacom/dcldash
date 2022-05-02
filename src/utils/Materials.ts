@@ -1,40 +1,41 @@
 export class Dash_MaterialInstance {
     private _transparent: Material | undefined
-    private _opaqueRed: Material | undefined
-    private _opaqueGreen: Material | undefined
-    private _opaqueBlue: Material | undefined
-    private _opaqueBlack: Material | undefined
+    private _Red: Material | undefined
+    private _Green: Material | undefined
+    private _Blue: Material | undefined
+    private _Black: Material | undefined
 
     public transparent(): Material {
         if(this._transparent) return this._transparent
         this._transparent = new Material()
         this._transparent.albedoColor = new Color4(0,0,0,0)
+        this._transparent.castShadows = false
         return this._transparent
     }
 
-    public opaqueRed(): Material {
-        if(this._opaqueRed) return this._opaqueRed
-        this._opaqueRed = new Material()
-        this._opaqueRed.albedoColor = new Color4(1,0,0,.5)
-        return this._opaqueRed
+    public Red(): Material {
+        if(this._Red) return this._Red
+        this._Red = new Material()
+        this._Red.albedoColor = new Color4(1,0,0,.5)
+        return this._Red
     }
-    public opaqueGreen(): Material {
-        if(this._opaqueGreen) return this._opaqueGreen
-        this._opaqueGreen = new Material()
-        this._opaqueGreen.albedoColor = new Color4(0,1,0,.5)
-        return this._opaqueGreen
+    public Green(): Material {
+        if(this._Green) return this._Green
+        this._Green = new Material()
+        this._Green.albedoColor = new Color4(0,1,0,.5)
+        return this._Green
     }
-    public opaqueBlue(): Material {
-        if(this._opaqueBlue) return this._opaqueBlue
-        this._opaqueBlue = new Material()
-        this._opaqueBlue.albedoColor = new Color4(0,0,1,.5)
-        return this._opaqueBlue
+    public Blue(): Material {
+        if(this._Blue) return this._Blue
+        this._Blue = new Material()
+        this._Blue.albedoColor = new Color4(0,0,1,.5)
+        return this._Blue
     }
-    public opaqueBlack(): Material {
-        if(this._opaqueBlack) return this._opaqueBlack
-        this._opaqueBlack = new Material()
-        this._opaqueBlack.albedoColor = new Color4(0,0,0,.5)
-        return this._opaqueBlack
+    public Black(): Material {
+        if(this._Black) return this._Black
+        this._Black = new Material()
+        this._Black.albedoColor = new Color4(0,0,0,.5)
+        return this._Black
     }
 }
 
