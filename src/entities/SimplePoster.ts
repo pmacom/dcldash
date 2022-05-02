@@ -4,7 +4,7 @@ import { Dash_UV_Image } from '../utils/Uvs'
     Usage:
 
     import { SimplePoster } from "./entities/SimplePoster";
-    const sp = new SimplePoster()
+    const sp = new Dash_SimplePoster()
     sp.getComponent(Transform).position = new Vector3(8,1,8)
     sp.setImageUrl('https://pmacom.github.io/assets/theblock/formatted/robotbar.jpg')
     sp.setHyperlink('http://www.google.com')

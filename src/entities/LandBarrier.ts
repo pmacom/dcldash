@@ -129,6 +129,7 @@ export class Dash_LandBarrier {
     constructor(
         baseParcel: string,
         private parcels: string[],
+        private maxHeight: number,
         public exitLocation: Vector3,
     ){
         const baseCoords = baseParcel.split(',')
@@ -146,6 +147,7 @@ export class Dash_LandBarrier {
             const barrierZone = new BarrierZone(
                 BarrierMaterial,
                 'accountrequired',
+                this.maxHeight,
                 this.exitLocation,
                 north,
                 south,
@@ -186,6 +188,7 @@ class BarrierZone extends Entity {
     constructor(
         public material: Material,
         private message: string = 'privateevent',
+        private maxHeight: number,
         public exitLocation: Vector3,
         showNorth?: boolean,
         showSouth?: boolean,
