@@ -7,17 +7,17 @@ const packageJson = require('./package.json');
 const PROD = !!process.env.CI
 
 const minify = [
-  terser({
-    ecma: 2020,
-    mangle: { toplevel: true },
-    compress: {
-      module: true,
-      toplevel: true,
-      unsafe_arrows: true,
-      drop_debugger: true
-    },
-    output: { quote_style: 1 }
-  })
+  // terser({
+  //   ecma: 2020,
+  //   mangle: { toplevel: true },
+  //   compress: {
+  //     module: true,
+  //     toplevel: true,
+  //     unsafe_arrows: true,
+  //     drop_debugger: true
+  //   },
+  //   output: { quote_style: 1 }
+  // })
 ]
 
 export default {
