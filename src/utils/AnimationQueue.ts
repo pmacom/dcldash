@@ -19,7 +19,7 @@ import _Set from 'es6-set'
 export interface Dash_AnimationQueue_Setting {
     duration: number
     id?: number
-    interval?: number,
+    onInit?: () => void
     data?: any
     onFrame?: (progress: number, data?: any) => void
     onComplete?: () => void
@@ -29,10 +29,7 @@ export interface Dash_AnimationQueue_Setting {
 class AnimationQueue_Controller implements ISystem {
     private system: ISystem
     private nonce: number = 0
-    private queue: _Map<number, Dash_AnimationQueue_Setting> = new _Map()
-    private timer: number = 0
-    private interval: number = .1
-
+    private queue: typeof _Map = new _Map()
     constructor(){ this.system = this }
     add(setting: Dash_AnimationQueue_Setting): Dash_AnimationQueue_Setting {
         setting.id = this.nonce++
@@ -43,14 +40,15 @@ class AnimationQueue_Controller implements ISystem {
     update(dt: number){
         if(!this.queue.size){ this.disable() }
         this.queue.forEach((setting: Dash_AnimationQueue_Setting) => {
-            const { id, onFrame, onComplete, duration, data } = setting
+            const { id, onInit, onFrame, onComplete, duration, data } = setting
             if(!setting.timer) setting.timer = 0
+            if(setting.timer && setting.timer == 0 && onInit){ onInit() }
             setting.timer+=dt
             const progress = setting.timer/duration
             if(onFrame){ onFrame(progress, data) }
             if(setting.timer >= duration){
                 if(onComplete){ onComplete() }
-                this.queue.delete(id!)
+                this.queue.delete(id)
             }
         })
     }
