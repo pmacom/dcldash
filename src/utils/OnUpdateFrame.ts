@@ -1,4 +1,8 @@
-import 'es6-shim'
+// @ts-ignore
+import _Map from 'es6-map'
+
+// @ts-ignore
+import _Set from 'es6-set' 
 
 /**
  * Usage
@@ -26,7 +30,7 @@ export interface Dash_OnUpdateFrame_Instance {
 export class Dash_OnUpdateFrame_Controller implements ISystem {
     private system: ISystem
     private nonce: number = 0
-    private queue: Map<number, Dash_OnUpdateFrame_Setting> = new Map()
+    private queue: _Map<number, Dash_OnUpdateFrame_Setting> = new _Map()
     private timer: number = 0
 
     constructor(){ this.system = this }

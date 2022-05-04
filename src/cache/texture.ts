@@ -1,7 +1,11 @@
-import 'es6-shim'
+// @ts-ignore
+import _Map from 'es6-map'
+
+// @ts-ignore
+import _Set from 'es6-set' 
 
 class Dash_Texture_Instance {
-    private textures: Map<string, Texture> = new Map()
+    private textures: _Map<string, Texture> = new _Map()
 
     create(src: string): Texture {
         if(this.textures.has(src)) return this.textures.get(src)!

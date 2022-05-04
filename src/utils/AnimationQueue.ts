@@ -1,4 +1,8 @@
-import 'es6-shim'
+// @ts-ignore
+import _Map from 'es6-map'
+
+// @ts-ignore
+import _Set from 'es6-set' 
 
 /**
  * Usage
@@ -25,7 +29,7 @@ export interface Dash_AnimationQueue_Setting {
 class AnimationQueue_Controller implements ISystem {
     private system: ISystem
     private nonce: number = 0
-    private queue: Map<number, Dash_AnimationQueue_Setting> = new Map()
+    private queue: _Map<number, Dash_AnimationQueue_Setting> = new _Map()
     private timer: number = 0
     private interval: number = .1
 

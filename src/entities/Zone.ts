@@ -1,9 +1,14 @@
 import { getUserData } from "@decentraland/Identity";
 import { Dash_GetSceneData } from "../utils/GetSceneData";
 import { Dash_TriggerZone } from '../utils/TriggerZone'
+// @ts-ignore
+import _Map from 'es6-map'
+
+// @ts-ignore
+import _Set from 'es6-set' 
 
 const sceneMessageBus = new MessageBus()
-const zones: Map<string, Dash_Zone> = new Map()
+const zones: _Map<string, Dash_Zone> = new _Map()
 
 class ParcelHideAvatar extends Entity {
     constructor(){
@@ -17,7 +22,7 @@ class ZoneManagerInstance {
     private userId: string | undefined
     private base: Vector2 | undefined
     private parcelHideAvatars: ParcelHideAvatar[] = []
-    private zones: Map<string, Set<string>> = new Map()
+    private zones: _Map<string, _Set<string>> = new _Map()
     public currentZone: string = 'primaryZone'
     private parcelSize: Vector3 | undefined
 
@@ -28,7 +33,7 @@ class ZoneManagerInstance {
             const { base, parcels, maxHeight } = await Dash_GetSceneData()
             const userData = await getUserData()
             this.userId = userData!.userId
-            this.zones.set('primaryZone', new Set())
+            this.zones.set('primaryZone', new _Set())
             this.parcelSize = new Vector3(16, maxHeight, 16)
 
             const baseCoords = base.split(',')
@@ -71,7 +76,7 @@ class ZoneManagerInstance {
     }
 
     private removeUserFromAllZones(userId: string){
-        this.zones.forEach((zone: Set<string>, name: string) => { zone.delete(userId)})
+        this.zones.forEach((zone: _Set<string>, name: string) => { zone.delete(userId)})
     }
 
     public addUserToZone(zoneName: string, userId: string){
@@ -82,7 +87,7 @@ class ZoneManagerInstance {
             if(this.zones.has(zoneName)){
                 this.zones.get(zoneName)!.add(userId)
             }else{
-                this.zones.set(zoneName, new Set([userId]))
+                this.zones.set(zoneName, new _Set([userId]))
             }
         }
         this.updateParcelHideAvatars()
@@ -90,7 +95,7 @@ class ZoneManagerInstance {
 
     public getUserIdsForZone(zoneName: string): string[] {
         const userIds: string[] = []
-        const ids: Set<string> = this.zones.has(zoneName) ? this.zones.get(zoneName)! : new Set()
+        const ids: _Set<string> = this.zones.has(zoneName) ? this.zones.get(zoneName)! : new _Set()
         ids!.forEach((userId: string) => userIds.push(userId))
         return [this.userId!, ...userIds]
     }
@@ -135,7 +140,7 @@ export class Dash_Zone extends Entity {
     private triggerZone: Dash_TriggerZone = new Dash_TriggerZone()
     public inZone: boolean = false
     public userId: string | undefined
-    public excludeIds: Set<string> = new Set()
+    public excludeIds: _Set<string> = new _Set()
     public excludeIdsArray: string[] = []
 
     constructor(

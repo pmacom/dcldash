@@ -1,8 +1,13 @@
-import 'es6-shim'
 import { Dash_VideoTexture } from "./videoTexture"
 
+// @ts-ignore
+import _Map from 'es6-map'
+
+// @ts-ignore
+import _Set from 'es6-set' 
+
 class Dash_VideoMaterial_Instance {
-    private videoMaterials: Map<string, Material> = new Map()
+    private videoMaterials: _Map<string, Material> = new _Map()
 
     create(src: string): Material {
         if(this.videoMaterials.has(src)) return this.videoMaterials.get(src)!
