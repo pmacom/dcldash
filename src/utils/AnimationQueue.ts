@@ -15,7 +15,7 @@ import 'es6-shim'
 export interface Dash_AnimationQueue_Setting {
     duration: number
     id?: number
-    onInit?: () => void
+    interval?: number,
     data?: any
     onFrame?: (progress: number, data?: any) => void
     onComplete?: () => void
@@ -38,22 +38,17 @@ class AnimationQueue_Controller implements ISystem {
     }
     update(dt: number){
         if(!this.queue.size){ this.disable() }
-        this.timer+=dt
-        if(this.timer >= this.interval){
-            this.queue.forEach((setting: Dash_AnimationQueue_Setting) => {
-                const { id, onInit, onFrame, onComplete, duration, data } = setting
-                if(!setting.timer) setting.timer = 0
-                if(setting.timer && setting.timer == 0 && onInit){ onInit() }
-                setting.timer+=dt
-                const progress = setting.timer/duration
-                if(onFrame){ onFrame(progress, data) }
-                if(setting.timer >= duration){
-                    if(onComplete){ onComplete() }
-                    this.queue.delete(id!)
-                }
-            })
-            this.timer = 0
-        }
+        this.queue.forEach((setting: Dash_AnimationQueue_Setting) => {
+            const { id, onFrame, onComplete, duration, data } = setting
+            if(!setting.timer) setting.timer = 0
+            setting.timer+=dt
+            const progress = setting.timer/duration
+            if(onFrame){ onFrame(progress, data) }
+            if(setting.timer >= duration){
+                if(onComplete){ onComplete() }
+                this.queue.delete(id!)
+            }
+        })
     }
     enable(){ if(!this.system.active) engine.addSystem(this) }
     disable(){ if(this.system.active) engine.removeSystem(this) }
