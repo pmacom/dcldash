@@ -6,6 +6,20 @@ import { terser } from 'rollup-plugin-terser';
 const packageJson = require('./package.json');
 const PROD = !!process.env.CI
 
+const minify = [
+  terser({
+    ecma: 2020,
+    mangle: { toplevel: true },
+    compress: {
+      module: true,
+      toplevel: true,
+      unsafe_arrows: true,
+      drop_debugger: true
+    },
+    output: { quote_style: 1 }
+  })
+]
+
 export default {
   input: 'src/index.ts',
   context: 'globalThis',
@@ -16,6 +30,13 @@ export default {
       amd: {
         id: packageJson.name
       },
+      plugins: minify
+    },
+    {
+      file: packageJson.main,
+      format: 'es',
+      file: 'dist/bundle.js',
+      plugins: minify
     },
   ],
   plugins: [

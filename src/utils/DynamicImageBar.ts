@@ -1,8 +1,6 @@
 import { Dash_Ease } from "./Ease"
 import { DynamicImage } from "./DynamicImage"
 
-declare const Map: any
-
 export enum DynamicBarOrientation {
     HALIGN_LEFT,
     HALIGN_CENTER,

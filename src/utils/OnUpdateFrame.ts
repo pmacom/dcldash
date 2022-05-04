@@ -1,4 +1,4 @@
-declare const Map: any
+import 'es6-shim'
 
 /**
  * Usage
@@ -13,6 +13,7 @@ declare const Map: any
 export interface Dash_OnUpdateFrame_Setting {
     id?: number
     data?: any
+    interval?: number
     onFrame?: (data: any, dt: number) => void
 }
 
@@ -25,20 +26,35 @@ export interface Dash_OnUpdateFrame_Instance {
 export class Dash_OnUpdateFrame_Controller implements ISystem {
     private system: ISystem
     private nonce: number = 0
-    private queue: typeof Map = new Map()
+    private queue: Map<number, Dash_OnUpdateFrame_Setting> = new Map()
+    private timer: number = 0
+
     constructor(){ this.system = this }
-    add(onFrame: (data: any, dt: number) => void, data?: any): Dash_OnUpdateFrame_Instance {
-        const setting = { id: this.nonce++, onFrame, data }
+    add(
+        onFrame: (data: any, dt: number) => void,
+        interval: number = .1,
+        data?: any
+    ): Dash_OnUpdateFrame_Instance {
+        const setting = {
+            id: this.nonce++,
+            onFrame,
+            data,
+            interval
+        }
         const start = () => { this.queue.set(setting.id, setting); this.enable()}
         const stop = () => { this.queue.delete(setting.id)}
         return { setting, start, stop }
     }
     update(dt: number){
         if(!this.queue.size){ this.disable() }
+        this.timer+=dt
         this.queue.forEach((setting: Dash_OnUpdateFrame_Setting) => {
-            const { id, onFrame, data } = setting
-            if(onFrame){ onFrame(data, dt) }
+            const { id, onFrame, interval, data } = setting
+            if(this.timer >= interval! && onFrame){
+                onFrame(data, dt)
+            }
         })
+        this.timer = 0
     }
     enable(){ if(!this.system.active) engine.addSystem(this) }
     disable(){ if(this.system.active) engine.removeSystem(this) }
