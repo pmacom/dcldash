@@ -1,7 +1,11 @@
-import 'es6-shim'
+// @ts-ignore
+import _Map from 'es6-map'
+
+// @ts-ignore
+import _Set from 'es6-set' 
 
 class Dash_VideoClip_Instance {
-    private clips: Map<string, VideoClip> = new Map()
+    private clips: _Map<string, VideoClip> = new _Map()
 
     create(src: string): VideoClip {
         if(this.clips.has(src)) return this.clips.get(src)!

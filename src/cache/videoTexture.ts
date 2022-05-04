@@ -1,8 +1,12 @@
-import 'es6-shim'
 import { Dash_VideoClip } from "./videoClip"
+// @ts-ignore
+import _Map from 'es6-map'
+
+// @ts-ignore
+import _Set from 'es6-set' 
 
 class Dash_VideoTexture_Instance {
-    private videoTextures: Map<string, VideoTexture> = new Map()
+    private videoTextures: _Map<string, VideoTexture> = new _Map()
 
     create(src: string): VideoTexture {
         if(this.videoTextures.has(src)) return this.videoTextures.get(src)!

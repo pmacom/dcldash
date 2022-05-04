@@ -1,13 +1,17 @@
-import 'es6-shim'
 import { Dash_OnUpdateFrame, Dash_OnUpdateFrame_Instance } from "./OnUpdateFrame"
+// @ts-ignore
+import _Map from 'es6-map'
+
+// @ts-ignore
+import _Set from 'es6-set' 
 
 export class Dash_Countdown {
     private remaining: number = 0
     private timer: Dash_OnUpdateFrame_Instance
     private seconds: number = 0
-    private onCompleteMap: Set<()=>void> = new Set()
-    private onUpdateMap: Set<(remaining: number) => void> = new Set()
-    private onSecondMap: Set<(remaining: number) => void> = new Set()
+    private onCompleteMap: _Set<()=>void> = new _Set()
+    private onUpdateMap: _Set<(remaining: number) => void> = new _Set()
+    private onSecondMap: _Set<(remaining: number) => void> = new _Set()
 
     constructor(){
         this.timer = Dash_OnUpdateFrame.add((data: any, dt: number) => this.onFrame(data, dt))
