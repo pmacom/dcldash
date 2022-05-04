@@ -3,6 +3,7 @@
   "version": "0.0.27",
   "description": "DCLconnect utility library",
   "main": "./dist/index.js",
+  "module": "./dist/bundle.js",
   "scripts": {
     "build": "rollup -c --environment BUILD:production",
     "link": "npm link && rollup --watch -c --environment BUILD:production"
