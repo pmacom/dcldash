@@ -1,6 +1,6 @@
 {
   "name": "dcldash",
-  "version": "0.0.26",
+  "version": "0.0.27",
   "description": "DCLconnect utility library",
   "main": "./dist/index.js",
   "scripts": {
@@ -36,6 +36,8 @@
     "rollup-plugin-terser": "^7.0.2"
   },
   "dependencies": {
+    "@types/es6-shim": "^0.31.42",
+    "es6-shim": "^0.35.6",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-typescript2": "^0.31.2"
   },

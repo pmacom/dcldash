@@ -2,10 +2,8 @@ import { getUserData } from "@decentraland/Identity";
 import { Dash_GetSceneData } from "../utils/GetSceneData";
 import { Dash_TriggerZone } from '../utils/TriggerZone'
 
-declare const Set: any
-declare const Map: any
 const sceneMessageBus = new MessageBus()
-const zones: typeof Map = new Map()
+const zones: Map<string, Dash_Zone> = new Map()
 
 class ParcelHideAvatar extends Entity {
     constructor(){
@@ -19,7 +17,7 @@ class ZoneManagerInstance {
     private userId: string | undefined
     private base: Vector2 | undefined
     private parcelHideAvatars: ParcelHideAvatar[] = []
-    private zones: typeof Map = new Map()
+    private zones: Map<string, Set<string>> = new Map()
     public currentZone: string = 'primaryZone'
     private parcelSize: Vector3 | undefined
 
@@ -73,7 +71,7 @@ class ZoneManagerInstance {
     }
 
     private removeUserFromAllZones(userId: string){
-        this.zones.forEach((zone: typeof Set, name: string) => { zone.delete(userId)})
+        this.zones.forEach((zone: Set<string>, name: string) => { zone.delete(userId)})
     }
 
     public addUserToZone(zoneName: string, userId: string){
@@ -82,7 +80,7 @@ class ZoneManagerInstance {
         }else{
             this.removeUserFromAllZones(userId)
             if(this.zones.has(zoneName)){
-                this.zones.get(zoneName).add(userId)
+                this.zones.get(zoneName)!.add(userId)
             }else{
                 this.zones.set(zoneName, new Set([userId]))
             }
@@ -92,9 +90,9 @@ class ZoneManagerInstance {
 
     public getUserIdsForZone(zoneName: string): string[] {
         const userIds: string[] = []
-        const ids = this.zones.has(zoneName) ? this.zones.get(zoneName) : new Set()
-        ids.forEach((userId: string) => userIds.push(userId))
-        return [this.userId, ...ids]
+        const ids: Set<string> = this.zones.has(zoneName) ? this.zones.get(zoneName)! : new Set()
+        ids!.forEach((userId: string) => userIds.push(userId))
+        return [this.userId!, ...userIds]
     }
 
     private updateParcelHideAvatars(){
@@ -137,7 +135,7 @@ export class Dash_Zone extends Entity {
     private triggerZone: Dash_TriggerZone = new Dash_TriggerZone()
     public inZone: boolean = false
     public userId: string | undefined
-    public excludeIds: typeof Set = new Set()
+    public excludeIds: Set<string> = new Set()
     public excludeIdsArray: string[] = []
 
     constructor(

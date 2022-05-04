@@ -1,8 +1,10 @@
+import 'es6-shim'
 import { Dash_OnUpdateFrame_Instance, Dash_OnUpdateFrame } from '../utils/OnUpdateFrame'
 import { Dash_Material } from '../utils/Materials'
 import { Dash_UV_Plane_Crop_Image } from '../utils/Uvs'
 import { movePlayerTo } from "@decentraland/RestrictedActions"
 import { Dash_TriggerZone } from '../utils/TriggerZone'
+import { Dash_GetSceneData } from '../utils/GetSceneData'
 
 /**
  * Usage - new LandBarrier(baseParcel, parcels)
@@ -33,11 +35,9 @@ import { Dash_TriggerZone } from '../utils/TriggerZone'
     transparent
  */
 
-declare const Set: any
-
 const texture = new Texture('https://pmacom.github.io/assets/dcldash/images/landBarrier/barrier-sprite.png', {
-    hasAlpha: true,
-    samplingMode: 3,
+    hasAlpha: false,
+    samplingMode: 0,
     wrap: 1
 })
 
@@ -121,41 +121,38 @@ const BarrierImageData: IBarrierImageData = {
 
 
 export class Dash_LandBarrier {
-    private base: Vector2
-    // private parcelsCoords: Vector2[]
+    private base: Vector2 | undefined
     private barrierZones: BarrierZone[] = []
-    private parcelStrings: typeof Set = new Set()
+    private parcelStrings: Set<string> = new Set()
 
-    constructor(
-        baseParcel: string,
-        private parcels: string[],
-        private maxHeight: number,
-        public exitLocation: Vector3,
-    ){
-        const baseCoords = baseParcel.split(',')
-        this.base = new Vector2(parseInt(baseCoords[0]), parseInt(baseCoords[1]))
-        this.parcels.forEach(parcel => this.parcelStrings.add(parcel))
-        this.parcels.forEach((parcel: string, index: number) => {
-            const c = parcel.split(',')
-            const coords = new Vector2(parseInt(c[0]), parseInt(c[1]))
-            const diff = new Vector2(coords.x-this.base.x, coords.y-this.base.y)
-            const position = new Vector3((diff.x*16)+8, 1,(diff.y*16)+8)
-            const north = !this.parcelStrings.has(`${coords.x-1},${coords.y}`)
-            const south = !this.parcelStrings.has(`${coords.x+1},${coords.y}`)
-            const east = !this.parcelStrings.has(`${coords.x},${coords.y+1}`)
-            const west = !this.parcelStrings.has(`${coords.x},${coords.y-1}`)
-            const barrierZone = new BarrierZone(
-                BarrierMaterial,
-                'accountrequired',
-                this.maxHeight,
-                this.exitLocation,
-                north,
-                south,
-                east,
-                west,
-            )
-            barrierZone.addComponentOrReplace(new Transform({ position }))
-            this.barrierZones.push(barrierZone)
+    constructor(public exitLocation: Vector3){
+        executeTask(async () => {
+            const { base, parcels, maxHeight } = await Dash_GetSceneData()
+            const baseCoords = base.split(',')
+            this.base = new Vector2(parseInt(baseCoords[0]), parseInt(baseCoords[1]))
+            parcels.forEach(parcel => this.parcelStrings.add(parcel))
+            parcels.forEach((parcel: string, index: number) => {
+                const c = parcel.split(',')
+                const coords = new Vector2(parseInt(c[0]), parseInt(c[1]))
+                const diff = new Vector2(coords.x-this.base!.x, coords.y-this.base!.y)
+                const position = new Vector3((diff.x*16)+8, 1,(diff.y*16)+8)
+                const north = !this.parcelStrings.has(`${coords.x-1},${coords.y}`)
+                const south = !this.parcelStrings.has(`${coords.x+1},${coords.y}`)
+                const east = !this.parcelStrings.has(`${coords.x},${coords.y+1}`)
+                const west = !this.parcelStrings.has(`${coords.x},${coords.y-1}`)
+                const barrierZone = new BarrierZone(
+                    BarrierMaterial,
+                    'accountrequired',
+                    maxHeight,
+                    this.exitLocation,
+                    north,
+                    south,
+                    east,
+                    west,
+                )
+                barrierZone.addComponentOrReplace(new Transform({ position }))
+                this.barrierZones.push(barrierZone)
+            })
         })
     }
 
