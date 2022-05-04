@@ -41,9 +41,6 @@ export default {
     },
   ],
   plugins: [
-    externals({
-      exclude: ['es6-map', 'es6-set']
-    }),
     resolve({
       preferBuiltins: false,
       browser: true
