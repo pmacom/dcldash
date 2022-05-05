@@ -1,8 +1,4 @@
-// @ts-ignore
-import _Map from 'es6-map'
-
-// @ts-ignore
-import _Set from 'es6-set' 
+declare const Map: any
 
 /**
  * Usage
@@ -29,7 +25,7 @@ export interface Dash_AnimationQueue_Setting {
 class AnimationQueue_Controller implements ISystem {
     private system: ISystem
     private nonce: number = 0
-    private queue: typeof _Map = new _Map()
+    private queue: typeof Map = new Map()
     constructor(){ this.system = this }
     add(setting: Dash_AnimationQueue_Setting): Dash_AnimationQueue_Setting {
         setting.id = this.nonce++

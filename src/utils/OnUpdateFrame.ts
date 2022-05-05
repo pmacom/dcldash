@@ -1,9 +1,3 @@
-// @ts-ignore
-import _Map from 'es6-map'
-
-// @ts-ignore
-import _Set from 'es6-set' 
-
 /**
  * Usage
  **
@@ -13,6 +7,8 @@ import _Set from 'es6-set'
     trackEntityController.start()
     Wait(() => { trackEntityController.stop() }, 3)
 */
+
+declare const Map: any
 
 export interface Dash_OnUpdateFrame_Setting {
     id?: number
@@ -29,7 +25,7 @@ export interface Dash_OnUpdateFrame_Instance {
 export class Dash_OnUpdateFrame_Controller implements ISystem {
     private system: ISystem
     private nonce: number = 0
-    private queue: typeof _Map = new _Map()
+    private queue: typeof Map = new Map()
     constructor(){ this.system = this }
     add(onFrame: (data: any, dt: number) => void, data?: any): Dash_OnUpdateFrame_Instance {
         const setting = { id: this.nonce++, onFrame, data }

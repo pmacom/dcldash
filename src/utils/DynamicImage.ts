@@ -1,9 +1,6 @@
 import { Dash_OnUpdateFrame, Dash_OnUpdateFrame_Instance } from "../utils/OnUpdateFrame"
-// @ts-ignore
-import _Map from 'es6-map'
 
-// @ts-ignore
-import _Set from 'es6-set' 
+declare const Map: any
 
 interface IDynamicImageSettings {
     from: string | number,
@@ -20,7 +17,8 @@ interface IDynamicImageAction {
 
 export class DynamicImage {
     private animation: Dash_OnUpdateFrame_Instance
-    private tweens: _Map<string, IDynamicImageAction> = new _Map()
+    private tweens: typeof Map = new Map()
+    // private tweens: Map<string, IDynamicImageAction> = new Map()
 
     constructor(public image: UIImage){
         this.animation = Dash_OnUpdateFrame.add((data: any, dt: number) => this.update(data, dt))
