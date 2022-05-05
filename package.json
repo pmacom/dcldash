@@ -37,10 +37,6 @@
     "rollup-plugin-node-externals": "^4.0.0",
     "rollup-plugin-terser": "^7.0.2"
   },
-  "dependencies": {
-    "es6-map": "^0.1.5",
-    "es6-set": "^0.1.5"
-  },
   "types": "dist/index.d.ts",
   "engines": {
     "node": ">=16.0.0",

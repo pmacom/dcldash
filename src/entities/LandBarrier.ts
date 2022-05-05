@@ -4,11 +4,8 @@ import { Dash_UV_Plane_Crop_Image } from '../utils/Uvs'
 import { movePlayerTo } from "@decentraland/RestrictedActions"
 import { Dash_TriggerZone } from '../utils/TriggerZone'
 import { Dash_GetSceneData } from '../utils/GetSceneData'
-// @ts-ignore
-import _Map from 'es6-map'
 
-// @ts-ignore
-import _Set from 'es6-set' 
+declare const Set: any
 
 /**
  * Usage - new LandBarrier(baseParcel, parcels)
@@ -127,7 +124,8 @@ const BarrierImageData: IBarrierImageData = {
 export class Dash_LandBarrier {
     private base: Vector2 | undefined
     private barrierZones: BarrierZone[] = []
-    private parcelStrings: _Set<string> = new _Set()
+    private parcelStrings: typeof Set = new Set()
+    // private parcelStrings: Set<string> = new Set()
 
     constructor(public exitLocation: Vector3){
         executeTask(async () => {

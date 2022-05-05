@@ -1,11 +1,8 @@
-// @ts-ignore
-import _Map from 'es6-map'
-
-// @ts-ignore
-import _Set from 'es6-set' 
+declare const Map: any
 
 class Dash_VideoClip_Instance {
-    private clips: _Map<string, VideoClip> = new _Map()
+    private clips: typeof Map = new Map()
+    // private clips: TypeMap<string, VideoClip> = new _Map()
 
     create(src: string): VideoClip {
         if(this.clips.has(src)) return this.clips.get(src)!

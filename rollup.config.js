@@ -41,11 +41,9 @@ export default {
     },
   ],
   plugins: [
-    externals({
-      include: ['es6-set', 'es6-map']
-    }),
+    externals(),
     resolve({
-      preferBuiltins: false,
+      preferBuiltins: true,
       browser: true
     }),
     typescript({ tsconfig: './tsconfig.json' }),

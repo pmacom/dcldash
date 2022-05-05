@@ -3,7 +3,8 @@
     "src/**/*.ts"
   ],
   "exclude": [
-    "dist"
+    "dist",
+    "node_modules",
   ],
   "compilerOptions": {
     "target": "es6",
@@ -12,7 +13,7 @@
     "removeComments": true,
     "declaration": true,
     "declarationDir": ".",
-    "outDir": "dist"
+    "outDir": "dist",
   },
   "extends": "./node_modules/decentraland-ecs/types/tsconfig.json"
 }
