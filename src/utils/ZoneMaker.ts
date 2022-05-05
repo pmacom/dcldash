@@ -29,6 +29,7 @@ export class Dash_ZoneMaker extends Entity {
       scale: new Vector3(1,1,1)
     }))
     this.shape.withCollisions = false
+    engine.addEntity(this)
 
     this.material.albedoColor = new Color4(0,1,1,.1)
     this.addComponent(this.material)

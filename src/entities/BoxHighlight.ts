@@ -338,7 +338,7 @@ export class Dash_BoxHighlight extends Entity {
      * Shows the boxHighlight
      */
     show(){
-        this.addComponent(new BoxHighlightAnimation())
+        this.addComponentOrReplace(new BoxHighlightAnimation())
         engine.addEntity(this)
         engine.addSystem(AnimateBoxHighlightsInstance)
     }
