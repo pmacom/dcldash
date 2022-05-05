@@ -1,11 +1,8 @@
-// @ts-ignore
-import _Map from 'es6-map'
-
-// @ts-ignore
-import _Set from 'es6-set' 
+declare const Map: any
 
 class Dash_Texture_Instance {
-    private textures: _Map<string, Texture> = new _Map()
+    private textures: typeof Map = new Map()
+    // private textures: Map<string, Texture> = new Map()
 
     create(src: string): Texture {
         if(this.textures.has(src)) return this.textures.get(src)!
