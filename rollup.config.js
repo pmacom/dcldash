@@ -51,6 +51,6 @@ export default {
       exclude: 'node_modules',
       ignoreGlobal: true,
     }),
-    PROD && terser({ format: { comments: false } }),
+    terser({ format: { comments: true } })
   ],
 };

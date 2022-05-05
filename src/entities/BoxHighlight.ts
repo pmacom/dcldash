@@ -106,7 +106,7 @@ const getTransform = (pAxis: string, rAxis: string, negate: boolean = false) : T
     })
 }
 
-/**
+/*!
  * Creates an animated cube to highlight something in DCL
  * it can be rotated to point in a predetermined direction
  * @public
