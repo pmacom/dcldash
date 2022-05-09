@@ -15,7 +15,6 @@ declare const Map: any
 export interface Dash_AnimationQueue_Setting {
     duration: number
     id?: number
-    onInit?: () => void
     data?: any
     onFrame?: (progress: number, data?: any) => void
     onComplete?: () => void
@@ -36,13 +35,13 @@ class AnimationQueue_Controller implements ISystem {
     update(dt: number){
         if(!this.queue.size){ this.disable() }
         this.queue.forEach((setting: Dash_AnimationQueue_Setting) => {
-            const { id, onInit, onFrame, onComplete, duration, data } = setting
+            const { id, onFrame, onComplete, duration, data } = setting
             if(!setting.timer) setting.timer = 0
-            if(setting.timer && setting.timer == 0 && onInit){ onInit() }
             setting.timer+=dt
             const progress = setting.timer/duration
             if(onFrame){ onFrame(progress, data) }
             if(setting.timer >= duration){
+                if(onFrame){ onFrame(100, data) }
                 if(onComplete){ onComplete() }
                 this.queue.delete(id)
             }

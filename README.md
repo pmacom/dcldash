@@ -8,7 +8,7 @@ A bundle of helper functions that simplify some of the more time consuming and r
 
 ## Debug
 
-### Tweaker
+### Tweaker (coming soon)
 
 **Purpose:** A graphical UI for adjusting the Transform of any Entity in your scene
 

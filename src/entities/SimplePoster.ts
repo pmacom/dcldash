@@ -3,13 +3,21 @@ import { Dash_UV_Image } from '../utils/Uvs'
 /**
     Usage:
 
-    import { SimplePoster } from "./entities/SimplePoster";
+    ```ts
+    import { Dash_SimplePoster } from "dcldash";
+
     const sp = new Dash_SimplePoster()
     sp.getComponent(Transform).position = new Vector3(8,1,8)
     sp.setImageUrl('https://pmacom.github.io/assets/theblock/formatted/robotbar.jpg')
     sp.setHyperlink('http://www.google.com')
+    ```
 */
 
+
+/**
+ * Evaluates JavaScript code and executes it.
+ * @param x A String value that contains valid JavaScript code.
+ */
 export class Dash_SimplePoster extends Entity {
     private shape: PlaneShape = new PlaneShape()
     private material: Material = new Material()

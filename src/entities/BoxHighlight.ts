@@ -1,6 +1,7 @@
-const boxHighlightTexture = new Texture("https://pmacom.github.io/assets/boxHighlight.png")
+const boxHighlightTexture = new Texture("https://pmacom.github.io/assets/dcldash/images/ui/dash_admin.png")
 
 /**
+ * @preserve
  * Object with settings for UV PlaneShape animations
  * @public
  */
