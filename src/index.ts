@@ -34,8 +34,7 @@ export { Dash_Cache_VideoClip } from './cache/videoClip'
 export { Dash_Cache_VideoMaterial } from './cache/videoMaterial'
 export { Dash_Cache_VideoTexture } from './cache/videoTexture'
 
-export { Dash_AdminMenu } from './ui/AdminMenu/AdminMenu'
-export { Dash_Tweaker } from './ui/Tweaker/Tweaker'
+export { Dash_AdminMenu, Dash_Tweaker } from './ui/AdminMenu/AdminMenu'
 
 export { Dash_CheckWithinVolume } from './utils/CheckWithinVolume'
 export { Dash_OnFirstMove } from './utils/OnFirstMove'
@@ -57,5 +56,3 @@ export {
     Dash_UI_Generate_StaticImages,
     Dash_UI_StaticImage
 } from './ui/Images'
-
-log('IMPORTING DCLDASH')

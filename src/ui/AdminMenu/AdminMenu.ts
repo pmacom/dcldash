@@ -2,7 +2,7 @@
 import { isPreviewMode } from "@decentraland/EnvironmentAPI"
 import { Dash_Cache_Texture } from "../../cache/texture"
 import { Dash_UI_AdminRadioButton_Group } from "../AdminRadioButton/AdminRadioButtonGroup"
-import { Dash_Tweaker, Dash_Tweaker_Instance } from "../Tweaker/Tweaker"
+import { Dash_Tweaker_Instance } from "../Tweaker/Tweaker"
 import { Dash_AdminUI_RadioButtons } from "./imageData"
 
 declare const Map: any
@@ -14,19 +14,18 @@ export enum Dash_AdminMenu_Mode {
 }
 
 const Dash_AdminTexture = Dash_Cache_Texture.create('https://pmacom.github.io/assets/dcldash/images/ui/dash_admin.png')
+let Dash_AdminMenuInstance : Dash_AdminMenu | undefined
 
-export class Dash_AdminMenu_Instance {
+export class Dash_AdminMenu {
     private mode: Dash_AdminMenu_Mode = Dash_AdminMenu_Mode.NONE
     private modeSelect: Dash_UI_AdminRadioButton_Group | undefined
-    private tweaker: Dash_Tweaker_Instance | undefined
+    public tweaker: Dash_Tweaker_Instance = new Dash_Tweaker_Instance()
 
     constructor(){
         log('Creating an admin menu')
         executeTask(async () => {
-            
             const previewMode = await isPreviewMode()
             if(previewMode){
-                this.tweaker = Dash_Tweaker
                 this.modeSelect = new Dash_UI_AdminRadioButton_Group(Dash_AdminTexture, Dash_AdminUI_RadioButtons, (mode: any) => {
                     switch(mode){
                         case 'tweaker':
@@ -50,6 +49,9 @@ export class Dash_AdminMenu_Instance {
                 break
             case Dash_AdminMenu_Mode.ZONE:  
                 break
+            default:
+                this.modeSelect?.setValue('')
+                break
         }
     }
 
@@ -58,4 +60,11 @@ export class Dash_AdminMenu_Instance {
     }
 }
 
-export const Dash_AdminMenu = new Dash_AdminMenu_Instance()
+export const Dash_Tweaker = (entity: Entity | undefined | null) => {
+    if(!Dash_AdminMenuInstance){
+        Dash_AdminMenuInstance = new Dash_AdminMenu()
+        Dash_AdminMenuInstance.tweaker?.setTarget(entity)
+    }else{
+        Dash_AdminMenuInstance.tweaker?.setTarget(entity)
+    }
+}

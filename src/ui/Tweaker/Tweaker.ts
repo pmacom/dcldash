@@ -507,5 +507,3 @@ export class Dash_Tweaker_Instance {
         this.container.visible = true
     }
 }
-
-export const Dash_Tweaker = new Dash_Tweaker_Instance()
