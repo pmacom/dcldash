@@ -527,7 +527,6 @@ export class DynamicImage {
                         if(tween.timer >= duration){ this.image[name] = from.type == 1 || to.type == 1 ? to.value : `${to.value}%`; break }
                         value = settings.ease ? settings.ease(tween.timer/duration) : tween.timer/duration
                         amount = Scalar.Lerp(from.value, to.value, value)
-                        log(from.type == 1, to.type == 1)
                         this.image[name] = from.type == 1 || to.type == 1 ? amount: `${amount}%`
                         break
                 }

@@ -81,6 +81,7 @@ export class Dash_ZoneMaker extends Entity {
         onFrame.stop()
         const position = this.getComponent(Transform).position
         const scale = this.getComponent(Transform).scale
+        // TODO: Add more informative logs
         log(`Zone Transform: \nposition: new Vector3(${position.x}, ${position.y}, ${position.z}),\nscale: new Vector3(${scale.x}, ${scale.y}, ${scale.z})`)
         this.isOn = false
       }

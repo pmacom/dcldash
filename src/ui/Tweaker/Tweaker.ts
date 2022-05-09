@@ -56,7 +56,6 @@ export class Dash_Tweaker_Instance {
     private selectionTarget: Entity | undefined | null
 
     constructor(private target?: Entity | undefined | null){
-        log('Creating a Tweaker')
         this.container = new UIContainerRect(Dash_GlobalCanvas)
         this.container.visible = false
         this.container.vAlign = "top"

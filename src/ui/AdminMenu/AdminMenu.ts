@@ -22,7 +22,6 @@ export class Dash_AdminMenu {
     public tweaker: Dash_Tweaker_Instance = new Dash_Tweaker_Instance()
 
     constructor(){
-        log('Creating an admin menu')
         executeTask(async () => {
             const previewMode = await isPreviewMode()
             if(previewMode){
