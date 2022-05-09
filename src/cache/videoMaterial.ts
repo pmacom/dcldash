@@ -1,4 +1,4 @@
-import { Dash_VideoTexture } from "./videoTexture"
+import { Dash_Cache_VideoTexture } from "./videoTexture"
 
 declare const Map: any
 
@@ -8,7 +8,7 @@ class Dash_VideoMaterial_Instance {
 
     create(src: string): Material {
         if(this.videoMaterials.has(src)) return this.videoMaterials.get(src)!
-        const videoTexture = Dash_VideoTexture.create(src)
+        const videoTexture = Dash_Cache_VideoTexture.create(src)
         const material = new Material()
         material.albedoTexture = videoTexture
         material.emissiveColor = Color3.White()
@@ -18,4 +18,4 @@ class Dash_VideoMaterial_Instance {
     }
 }
 
-export const Dash_VideoMaterial = new Dash_VideoMaterial_Instance()
+export const Dash_Cache_VideoMaterial = new Dash_VideoMaterial_Instance()

@@ -6,7 +6,8 @@
   "module": "./dist/bundle.js",
   "scripts": {
     "build": "rollup -c --environment BUILD:production",
-    "link": "npm link && rollup --watch -c --environment BUILD:production"
+    "link": "npm link && rollup --watch -c --environment BUILD:production",
+    "docs": "typedoc src/index.ts"
   },
   "typings": "./dist/index.d.ts",
   "decentralandLibrary": {
@@ -33,9 +34,11 @@
     "@rollup/plugin-node-resolve": "^13.1.3",
     "@rollup/plugin-typescript": "^8.3.1",
     "decentraland-ecs": "^6.10.0",
+    "docdash": "^1.2.0",
     "rollup": "^2.70.1",
     "rollup-plugin-node-externals": "^4.0.0",
-    "rollup-plugin-terser": "^7.0.2"
+    "rollup-plugin-terser": "^7.0.2",
+    "typedoc": "^0.22.15"
   },
   "types": "dist/index.d.ts",
   "engines": {

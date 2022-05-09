@@ -12,4 +12,4 @@ class Dash_VideoClip_Instance {
     }
 }
 
-export const Dash_VideoClip = new Dash_VideoClip_Instance()
+export const Dash_Cache_VideoClip = new Dash_VideoClip_Instance()

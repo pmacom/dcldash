@@ -12,4 +12,4 @@ class Dash_Texture_Instance {
     }
 }
 
-export const Dash_Texture = new Dash_Texture_Instance()
+export const Dash_Cache_Texture = new Dash_Texture_Instance()

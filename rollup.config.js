@@ -15,9 +15,12 @@ const minify = [
   //     module: true,
   //     toplevel: true,
   //     unsafe_arrows: true,
-  //     drop_debugger: true
+  //     drop_debugger: true,
   //   },
-  //   output: { quote_style: 1 }
+  //   format: {
+  //     'keep-fnames': true,
+  //   },
+  //   // output: { quote_style: 1 },
   // })
 ]
 
@@ -28,6 +31,7 @@ export default {
     {
       file: packageJson.main,
       format: 'amd',
+      sourcemap: true,
       amd: {
         id: packageJson.name
       },
@@ -36,6 +40,7 @@ export default {
     {
       file: packageJson.main,
       format: 'es',
+      sourcemap: true,
       file: 'dist/bundle.js',
       plugins: minify
     },
@@ -51,6 +56,44 @@ export default {
       exclude: 'node_modules',
       ignoreGlobal: true,
     }),
-    PROD && terser({ format: { comments: false } }),
+    // terser({ format: { comments: false } })
+    terser({
+
+
+
+      // ecma: 2020,
+      // mangle: { toplevel: true },
+      // compress: {
+      //   module: true,
+      //   toplevel: true,
+      //   unsafe_arrows: true,
+      //   drop_debugger: true,
+      // },
+      // format: {
+      //   comments: 'all',
+      // },
+
+
+
+      mangle: {
+        toplevel: false,
+        module: false,
+        eval: true,
+        keep_classnames: true,
+        keep_fnames: true,
+        reserved: ['global', 'globalThis', 'define']
+      },
+      compress: {
+        passes: 2
+      },
+      format: {
+        ecma: 5,
+        comments: /^!/,
+        beautify: false
+      },
+      toplevel: false
+
+      // output: { quote_style: 1 },
+    })
   ],
 };

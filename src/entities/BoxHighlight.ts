@@ -1,6 +1,7 @@
-const boxHighlightTexture = new Texture("https://pmacom.github.io/assets/boxHighlight.png")
+const boxHighlightTexture = new Texture("https://pmacom.github.io/assets/dcldash/images/ui/dash_admin.png")
 
 /**
+ * @preserve
  * Object with settings for UV PlaneShape animations
  * @public
  */
@@ -106,7 +107,7 @@ const getTransform = (pAxis: string, rAxis: string, negate: boolean = false) : T
     })
 }
 
-/**
+/*!
  * Creates an animated cube to highlight something in DCL
  * it can be rotated to point in a predetermined direction
  * @public
