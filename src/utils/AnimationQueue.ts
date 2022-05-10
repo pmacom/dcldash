@@ -41,7 +41,7 @@ class AnimationQueue_Controller implements ISystem {
             const progress = setting.timer/duration
             if(onFrame){ onFrame(progress, data) }
             if(setting.timer >= duration){
-                if(onFrame){ onFrame(100, data) }
+                if(onFrame){ onFrame(1, data) }
                 if(onComplete){ onComplete() }
                 this.queue.delete(id)
             }

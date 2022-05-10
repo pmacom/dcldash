@@ -9,7 +9,7 @@ const cropSourceX = 514
 const cropSourceY = 494
 const uvs = Dash_UV_Plane_Crop_Image(imageWidth, imageHeight, cropWidth, cropHeight, cropSourceX, cropSourceY)
 
-const texture = new Texture('images/dash_admin.png')
+const texture = new Texture('https://pmacom.github.io/assets/dcldash/images/textures/boxHighlight.png')
 
 const RedMaterial = new Material()
 RedMaterial.alphaTexture = texture
