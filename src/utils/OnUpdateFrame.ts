@@ -13,11 +13,10 @@ declare const Map: any
 export interface Dash_OnUpdateFrame_Setting {
     id?: number
     data?: any
-    onFrame?: (data: any, dt: number) => void
+    onFrame?: (dt: number) => void
 }
 
 export interface Dash_OnUpdateFrame_Instance {
-    setting: Dash_OnUpdateFrame_Setting
     start: () => void
     stop: () => void
 }
@@ -27,17 +26,17 @@ export class Dash_OnUpdateFrame_Controller implements ISystem {
     private nonce: number = 0
     private queue: typeof Map = new Map()
     constructor(){ this.system = this }
-    add(onFrame: (data: any, dt: number) => void, data?: any): Dash_OnUpdateFrame_Instance {
-        const setting = { id: this.nonce++, onFrame, data }
+    add(onFrame: (dt: number) => void): Dash_OnUpdateFrame_Instance {
+        const setting = { id: this.nonce++, onFrame }
         const start = () => { this.queue.set(setting.id, setting); this.enable()}
         const stop = () => { this.queue.delete(setting.id)}
-        return { setting, start, stop }
+        return { start, stop }
     }
     update(dt: number){
         if(!this.queue.size){ this.disable() }
         this.queue.forEach((setting: Dash_OnUpdateFrame_Setting) => {
-            const { id, onFrame, data } = setting
-            if(onFrame){ onFrame(data, dt) }
+            const { id, onFrame } = setting
+            if(onFrame){ onFrame(dt) }
         })
     }
     enable(){ if(!this.system.active) engine.addSystem(this) }

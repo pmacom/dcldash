@@ -10,15 +10,7 @@ declare const Set: any
 /**
  * Usage - new LandBarrier(baseParcel, parcels)
  *
-    const landBarrier = new Dash_LandBarrier("-49,-100", [
-        "-46,-99",
-        "-47,-99",
-        "-48,-99",
-        "-49,-99",
-        "-47,-100",
-        "-48,-100",
-        "-49,-100",
-    ], new Vector3(0, 0, -16.1))
+    const landBarrier = new Dash_LandBarrier(new Vector3(0, 0, -16.1))
 
     landBarrier.enable()
     landBarrier.disable()
@@ -125,6 +117,7 @@ export class Dash_LandBarrier {
     private base: Vector2 | undefined
     private barrierZones: BarrierZone[] = []
     private parcelStrings: typeof Set = new Set()
+    private message: string = "privateevent"
     // private parcelStrings: Set<string> = new Set()
 
     constructor(public exitLocation: Vector3){
@@ -144,7 +137,7 @@ export class Dash_LandBarrier {
                 const west = !this.parcelStrings.has(`${coords.x},${coords.y-1}`)
                 const barrierZone = new BarrierZone(
                     BarrierMaterial,
-                    'accountrequired',
+                    this.getMessage(),
                     maxHeight,
                     this.exitLocation,
                     north,
@@ -158,8 +151,13 @@ export class Dash_LandBarrier {
         })
     }
 
+    getMessage(): string { return this.message }
+
     setMessage(message: string){
-        this.barrierZones.forEach(barrier => barrier.setMessage(message))
+        this.message = message
+        this.barrierZones.forEach(barrier => {
+            barrier.setMessage(message)
+        })
     }
 
     disable(){
@@ -245,7 +243,7 @@ class BarrierZone extends Entity {
             north.setParent(this)
         }
 
-        this.animation = Dash_OnUpdateFrame.add((data, dt) => {
+        this.animation = Dash_OnUpdateFrame.add((dt: number) => {
             this.shapes.forEach(shape => {
                 let zuvs = shape.uvs!.map((uv: number, index: number) => {
                     return index % 2 == 0 ? uv+(dt*.05) : uv
@@ -276,7 +274,6 @@ class BarrierZone extends Entity {
     disable(){ this.triggerZone.disable() }
     enable(){ this.triggerZone.enable() }
 }
-
 
 class BarrierPlane extends Entity {
     public shape: PlaneShape = new PlaneShape()
