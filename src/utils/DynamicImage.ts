@@ -21,7 +21,7 @@ export class DynamicImage {
     // private tweens: Map<string, IDynamicImageAction> = new Map()
 
     constructor(public image: UIImage){
-        this.animation = Dash_OnUpdateFrame.add((data: any, dt: number) => this.update(data, dt))
+        this.animation = Dash_OnUpdateFrame.add((dt: number) => this.update(dt))
     }
 
     fadeIn(
@@ -488,7 +488,7 @@ export class DynamicImage {
         this.animation.start()
     }
 
-    update(data: any, dt: number){
+    update(dt: number){
         if(this.tweens.size){
             this.tweens.forEach((tween: IDynamicImageAction, name: string) => {
                 const { settings } = tween
