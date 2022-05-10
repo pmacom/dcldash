@@ -1,4 +1,4 @@
-const boxHighlightTexture = new Texture("https://pmacom.github.io/assets/dcldash/images/ui/dash_admin.png")
+const boxHighlightTexture = new Texture("https://pmacom.github.io/assets/dcldash/images/textures/boxHighlight.png")
 
 /**
  * @preserve
