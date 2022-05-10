@@ -123,12 +123,10 @@ myPoster.setImageUrl('https://pmacom.github.io/assets/croakz.png')
 >
 > ![](https://pmacom.github.io/assets/dcldash/images/docs/demo-landbarrier.gif)
 
-> **Example**
-> 
->```ts
-> import { Dash_LandBarrier } from 'dcldash'
-> 
-> const landBarrier = new Dash_LandBarrier(new Vector3(16,0,16)) // param: exitLocation
+```ts
+import { Dash_LandBarrier } from 'dcldash'
+
+const landBarrier = new Dash_LandBarrier(new Vector3(16,0,16)) // param: exitLocation
 landBarrier.setMessage("comingsoon")
 landBarrier.enable()
 // landBarrier.disable()
