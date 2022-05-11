@@ -471,7 +471,7 @@ countdown.start()
 
 > **Notes**
 > 
-> - *onSecond, onUodate and onComplete are all optional. But you probably want to use one of them, otherwise why use this to begin with?*
+> - *onSecond, onUpdate and onComplete are all optional. But you probably want to use one of them, otherwise why use this to begin with?*
 > - *You can set multiple callbacks to happen for each 'event' by adding another onSecond, onUpdate, or onComplete. Add as many as you want. I have no idea why thats a feature. I'm sure there was a reason. :shrug_emoji:*
 
 
