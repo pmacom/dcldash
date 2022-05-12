@@ -40,4 +40,10 @@ export class Dash_UI_ImageRadioButton_Group {
     show(){ this.mapping.forEach((uiImage: Dash_UI_ImageRadioButton) => {
         uiImage.image.visible = true
     })}
+    getImageByValue(value: number | string): UIImage | null | undefined {
+        if(this.mapping.has(value)){
+            const radioButton = this.mapping.get(value) as Dash_UI_ImageRadioButton
+            return radioButton.image
+        }
+    }
 }

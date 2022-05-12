@@ -3,13 +3,15 @@ import { Dash_UI_Image_Setting, Dash_UI_StaticImages } from "./interfaces"
 export const Dash_UI_Generate_StaticImages = (
     parent: UIShape,
     texture: Texture,
-    settings: Dash_UI_StaticImages
+    settings: Dash_UI_StaticImages,
+    onCreate?: (name: string, data: any, image: UIImage) => void,
 ) : UIImage[] => {
     const images: UIImage[] = []
     Object.keys(settings).forEach((settingName: string) => {
         const setting = settings[settingName]
         const image = Dash_UI_StaticImage(parent, texture, setting)
         images.push(image)
+        if(onCreate){ onCreate(settingName, setting.data ? setting.data : {}, image) }
     })
     return images
 }
