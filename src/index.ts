@@ -5,7 +5,6 @@
 
 
 
-
 export { Dash_TriggerZone } from './utils/TriggerZone'
 export { DynamicImage } from './utils/DynamicImage'
 export { DynamicImageBar } from './utils/DynamicImageBar'
@@ -47,7 +46,9 @@ export {
     Dash_UV_Image,
     Dash_UV_Video,
     Dash_UV_Plane_Crop_Image,
+    Dash_UV_Box,
 } from './utils/Uvs'
+export { Dash_UV_Box_HScroll, Dash_UV_Plane_Scroll } from './utils/Uvs'
 
 export {
     Dash_UI_Crop_Image,
@@ -56,3 +57,8 @@ export {
     Dash_UI_Generate_StaticImages,
     Dash_UI_StaticImage
 } from './ui/Images'
+
+export { Dash_UI_ImageRadioButton_Group } from './ui/ImageRadioButton/ImageRadioButtonGroup'
+export { Dash_UI_ImageRadioButton } from './ui/ImageRadioButton/ImageRadioButton'
+export { Dash_UI_ImageRadioButton_Settings, Dash_UI_ImageRadioButton_Group_Settings } from './ui/ImageRadioButton/interfaces'
+

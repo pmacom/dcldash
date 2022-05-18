@@ -15,7 +15,6 @@ export class Dash_TriggerZone extends Entity {
         super()
         engine.addEntity(this)
         this.checkCollision = Dash_OnUpdateFrame.add(() => this.check())
-        this.checkCollision.start()
     }
 
     private check(){
@@ -23,6 +22,8 @@ export class Dash_TriggerZone extends Entity {
         let t = new Vector3()
         let s = new Vector3()
         let r = new Quaternion()
+
+        log('checking', this.hasEntered)
 
         do {
             if(p){
@@ -46,6 +47,7 @@ export class Dash_TriggerZone extends Entity {
                 Camera.instance.feetPosition.z
             )
         )
+
         if(withinVolume && !this.hasEntered){
             this.onEnter()
             if(this.debug) this.debug.showHighlight()
@@ -62,8 +64,14 @@ export class Dash_TriggerZone extends Entity {
         this.debug.show()
     }
 
-    enable(){this.checkCollision?.start()}
-    disable(){ this.checkCollision?.stop()}
+    enable(){
+        this.hasEntered = false
+        this.checkCollision?.start()
+    }
+    disable(){
+        this.hasEntered = false
+        this.checkCollision?.stop()
+    }
 }
 
 class TriggerDebug extends Entity {
