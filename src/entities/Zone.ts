@@ -144,7 +144,11 @@ export class Dash_Zone extends Entity {
     public userId: string | undefined
     public excludeIds: typeof Set = new Set()
     // public excludeIds: Set<string> = new Set()
+    private enabled: boolean = false
     public excludeIdsArray: string[] = []
+    public spawnPoint: Vector3 = new Vector3()
+    public onEnter: () => void = () => {}
+    public onExit: () => void = () => {}
 
     constructor(
         public zoneName: string,
@@ -153,7 +157,6 @@ export class Dash_Zone extends Entity {
         super()
         zones.set(zoneName, this)
         this.addComponent(transform)
-        engine.addEntity(this)
 
         executeTask(async () => {
             let userData = await getUserData()
@@ -163,31 +166,44 @@ export class Dash_Zone extends Entity {
     }
 
     private setupTriggerZone(){
-        this.triggerZone.enable()
+        if(this.enabled) this.triggerZone.enable()
         this.triggerZone.addComponent(this.transform)
-        this.triggerZone.onEnter = () => this.onEnter()
-        this.triggerZone.onExit = () => this.onExit()
+        this.triggerZone.onEnter = () => this._onEnter()
+        this.triggerZone.onExit = () => this._onExit()
     }
 
-    private onEnter(){
-        ZoneManager.addUserToZone(this.zoneName, this.userId!)
-        sceneMessageBus.emit(`dash-zone-enter`, { userId: this.userId, zoneName: this.zoneName })
+    private _onEnter(){
+        if(this.enabled){
+            log('ZONE: ON ENTER')
+            ZoneManager.addUserToZone(this.zoneName, this.userId!)
+            sceneMessageBus.emit(`dash-zone-enter`, { userId: this.userId, zoneName: this.zoneName })
+            this.onEnter()
+        }
     }
 
-    private onExit(){
-        ZoneManager.addUserToZone('primaryZone', this.userId!)
-        sceneMessageBus.emit(`dash-zone-exit`,  { userId: this.userId, zoneName: this.zoneName  })
+    private _onExit(){
+        if(this.enabled){
+            log('ZONE: ON EXIT')
+            ZoneManager.addUserToZone('primaryZone', this.userId!)
+            sceneMessageBus.emit(`dash-zone-exit`,  { userId: this.userId, zoneName: this.zoneName  })
+            this.onExit()
+        }
     }
 
     public enable(){
+        if(!this.alive) engine.addEntity(this)
+        this.enabled = true
         this.triggerZone.enable()
     }
 
     public disable(){
+        if(this.alive) engine.removeEntity(this)
+        this.enabled = false
         this.triggerZone.disable()
     }
 
     public enableDebug(){
+        this.enabled = true
         this.triggerZone.enableDebug()
     }
 }
