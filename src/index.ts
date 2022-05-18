@@ -4,6 +4,7 @@
 ///<reference lib="es2015.iterable" />
 
 
+export { StageLight } from './entities/Lights/Light'
 
 export { Dash_TriggerZone } from './utils/TriggerZone'
 export { DynamicImage } from './utils/DynamicImage'
@@ -62,3 +63,4 @@ export { Dash_UI_ImageRadioButton_Group } from './ui/ImageRadioButton/ImageRadio
 export { Dash_UI_ImageRadioButton } from './ui/ImageRadioButton/ImageRadioButton'
 export { Dash_UI_ImageRadioButton_Settings, Dash_UI_ImageRadioButton_Group_Settings } from './ui/ImageRadioButton/interfaces'
 
+log('This is REALLY coming from a local update to the package')

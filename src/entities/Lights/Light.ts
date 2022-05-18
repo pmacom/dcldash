@@ -22,6 +22,7 @@ export class StageLight extends Entity {
     private beamEntity1: Entity = new Entity()
     private beamEntity2: Entity = new Entity()
     private beamEntity3: Entity = new Entity()
+    private beamEntity4: Entity = new Entity()
 
     private sunflareWrapper: Entity = new Entity()
     private sunflare: Entity = new Entity()
@@ -51,9 +52,10 @@ export class StageLight extends Entity {
 
         this.setupCenterEntity()
         this.setupBeams([
-            this.beamEntity1,
-            this.beamEntity2,
-            this.beamEntity3
+            this.beamEntity1, // 0
+            this.beamEntity2, // 1
+            this.beamEntity3, // 2
+            this.beamEntity4, // 3
         ])
         this.setupUVs()
         this.setupMaterials()
@@ -75,11 +77,20 @@ export class StageLight extends Entity {
     }
 
     animate(dt: number){
-        log('I should rotate to some sort of thing')
         if(this.target){
             let self = this.getComponent(Transform)
-            
-            self.lookAt(this.target.position)
+
+            let parent = this.getParent()
+            let computedTransform = new Vector3()
+            do {
+                if(parent){
+                    let localTransform = parent.getComponentOrCreate(Transform)
+                    computedTransform.addInPlace(localTransform.position.clone())
+                    parent = parent.getParent()
+                }
+            } while (parent && parent.uuid !== '0')
+
+            self.lookAt(Vector3.Add(this.target.position, computedTransform.negate()))
         }
     }
 
@@ -163,7 +174,7 @@ export class StageLight extends Entity {
     }
 
     setFocusTarget(target: Transform){
-        this.target
+        this.target = target
     }
 
     setFocusArea(entity: Entity){
