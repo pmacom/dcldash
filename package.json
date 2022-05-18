@@ -46,7 +46,6 @@
     "yarn": "please use npm"
   },
   "dependencies": {
-    "dcldash": "file:",
     "decentraland-ecs": "^6.10.0"
   }
 }
