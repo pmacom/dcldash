@@ -3,7 +3,6 @@
 ///<reference lib="es2015.collection" />
 ///<reference lib="es2015.iterable" />
 
-
 export { StageLight } from './entities/Lights/Light'
 
 export { Dash_TriggerZone } from './utils/TriggerZone'
@@ -28,6 +27,7 @@ export { Dash_OnUpdateFrame, Dash_OnUpdateFrame_Instance } from './utils/OnUpdat
 export { Dash_GlobalCanvas } from './utils/GlobalCanvas'
 export { Dash_Ease } from './utils/Ease'
 export { Dash_Material } from './utils/Materials'
+export { Dash_GridBox } from './entities/GridBox'
 
 export { Dash_Cache_Texture } from './cache/texture'
 export { Dash_Cache_VideoClip } from './cache/videoClip'
