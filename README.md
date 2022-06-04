@@ -315,9 +315,49 @@ raygun.startShooting()
 <!-- # UI -->
 ![](https://pmacom.github.io/assets/dcldash/images/docs/header-ui.png)
 
-## DynamicImage (Docs Coming Soon)
+## DynamicImage
 
 > **Purpose:** Animate UIImage size, position and cropping with ease.
+
+```
+import {
+  Dash_Cache_Texture,
+  Dash_Ease,
+  Dash_GlobalCanvas,
+  DynamicImage
+} from "dcldash";
+
+// Just a regular image as you are normally creating them. I'm using the default thumbnail here that should be in everyone's scene from the start.
+const imageTexture: Texture = Dash_Cache_Texture.create('images/scene-thumbnail.png')
+const image = new UIImage(Dash_GlobalCanvas, imageTexture)
+image.width = 100
+image.height = 100
+image.sourceWidth = 100
+image.sourceHeight = 100
+
+// Create the DynamicImage from the above image
+const di = new DynamicImage(image)
+di.moveTo(100, 100, 2, Dash_Ease.easeOutElastic)
+// di.fadeIn(duration, ease?, callback?)
+// di.fadeOut(duration, ease?, callback?)
+// di.fadeTo(opacity, duration, ease?, callback?)
+// di.moveTo(x, y, duration, ease?, callback?)
+// di.moveToX(x, duration, ease?, callback?)
+// di.moveToY(y, duration, ease?, callback?)
+// di.moveRelativeTo(x, y, duration, ease?, callback?)
+// di.resizeTo(width, height, duration, ease?, callback?)
+// di.resizeWidthTo(width, duration, ease?, callback?)
+// di.resizeHeightTo(height, duration, ease?, callback?)
+// di.moveSourceTo(x, y, duration, ease?, callback?)
+// di.moveSourceLeftTo(x, duration, ease?, callback?)
+// di.moveSourceTopTo(y, duration, ease?, callback?)
+// di.resizeSourceTo(width, height, duration, ease?, callback?)
+// di.resizeSourceWidthTo(width, duration, ease?, callback?)
+// di.resizeSourceHeightTo(height, duration, ease?, callback?)
+// di.scaleIn(startScale, duration, ease?, callback?)
+// di.scaleOut(endScale, duration, ease?, callback?)
+// di.scaleTo(size, duration, ease?, callback?)
+```
 
 ![](https://pmacom.github.io/assets/dcldash/images/docs/dash-spacer-invis.png)
 
