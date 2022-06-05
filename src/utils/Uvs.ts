@@ -22,16 +22,16 @@ export const Dash_UV_Video = () => {
 
 export const Dash_UV_Image = () => {
     return [
-      0,1,
-      1,1,
-      1,0,
       0,0,
+      1,0,
+      1,1,
+      0,1,
 
       1,0,
       0,0,
       0,1,
       1,1,
-  ]
+    ]
 }
 
 export const Dash_UV_Box = () => {
