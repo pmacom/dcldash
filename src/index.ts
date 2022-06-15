@@ -19,7 +19,7 @@ export {
     Dash_UI_Image_RenderSettings,
     Dash_UI_Image_CropSettings,
     Dash_UI_Image_Setting,
-    Dash_UI_StaticImages
+    Dash_UI_StaticImages,
 } from './ui/interfaces'
 
 export { Dash_AnimationQueue } from './utils/AnimationQueue'
@@ -33,6 +33,7 @@ export { Dash_Cache_Texture } from './cache/texture'
 export { Dash_Cache_VideoClip } from './cache/videoClip'
 export { Dash_Cache_VideoMaterial } from './cache/videoMaterial'
 export { Dash_Cache_VideoTexture } from './cache/videoTexture'
+export { Dash_Cache_GLTFShape } from './cache/gltfShape'
 
 export { Dash_AdminMenu, Dash_Tweaker } from './ui/AdminMenu/AdminMenu'
 
@@ -56,8 +57,11 @@ export {
     Dash_UI_Generate_StaticButton,
     Dash_UI_Generate_StaticButtons,
     Dash_UI_Generate_StaticImages,
-    Dash_UI_StaticImage
+    Dash_UI_StaticImage,
+    Dash_UI_Icon
 } from './ui/Images'
+
+export { Dash_Helpers_GetEntitiesWithComponent } from './helpers/helpers'
 
 export { Dash_UI_ImageRadioButton_Group } from './ui/ImageRadioButton/ImageRadioButtonGroup'
 export { Dash_UI_ImageRadioButton } from './ui/ImageRadioButton/ImageRadioButton'

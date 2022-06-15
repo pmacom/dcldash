@@ -215,6 +215,9 @@ export class Dash_Tweaker_Instance {
     }
 
     public setTarget(entity: Entity | undefined | null){
+        if(entity && !entity?.hasComponent(Transform)){
+            entity?.addComponent(new Transform())
+        }
         if(entity){
             const { position, scale, rotation } = entity.getComponent(Transform)
             this.infoDetails.setInitialValues(`position.x`, position.x)
