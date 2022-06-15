@@ -23,8 +23,6 @@ export class Dash_TriggerZone extends Entity {
         let s = new Vector3()
         let r = new Quaternion()
 
-        log('checking', this.hasEntered)
-
         do {
             if(p){
                 let localTransform = p.getComponentOrCreate(Transform)
