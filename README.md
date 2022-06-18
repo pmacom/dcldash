@@ -40,29 +40,34 @@
 
 ## Tweaker
 
-> **Purpose:** Placing entities in the correct location can be tough and time-consuming. With this utility you can quickly place it exactly where you want and then copy the transform values that are outputted to the console.
+> **Purpose:** The Tweaker is a game-changing tool, empowering users to easily control and perfect the trasnform values of different entities in their scene. With this utility you can quickly place entities _exactly_ where you want them to be, and simply retrieve the new transform values as an outputted log in the console.
 > 
 > ![](https://pmacom.github.io/assets/dcldash/images/docs/demo-tweaker.png)
 
+**How to Set Up the Tweaker**
+> - Using the Tweaker is as simple as importing { Dash_Tweaker}, and simply calling the function with the entity you'd like to tweak by using Dash_Tweaker(_entity_). 
+> - On loading the Scene, the Tweaker will be up and running with your entity selected.
+> - If you'd like to change the selected entity, you can either change the entity name in the Dash_Tweaker function. You can also use the 'Select' feature in the Tweaker for entities which have colliders, without having to hotload the scene.
+
 ```ts
+//First, we import the Tweaker from dcldash
 import { Dash_Tweaker } from "dcldash"
 
+//Then, we declare an Entity, which we wish to tweaked by our Tweaker
 const testEntity = new Entity("testBox")
-testEntity(new BoxShape())
-testEntity(new Transform({
+testEntity.addComponent(new BoxShape())
+testEntity.addComponent(new Transform({
   position: new Vector3(8, 2, 8),
 }))
-  
+
+//Finally, we execute a Dash_Tweaker function for the entity of our choice
 Dash_Tweaker(testEntity)
 ```
-
-
-> **Notes**
-> 
-> - Toggle between Position and Rotation modes
-> - You can select/deselect the current entity. (This feature will only work with entities that have a collider).
-> - You can also log the output of the Transform by htting the 'Log' button.
-> - Reset the transform to it's original state with the 'Revert' button.
+> **Using the Tweaker**
+> - The Tweaker allows you to dynamically impact the Transform component of an entity, right inside the scene preview. 
+> - This effectively means you can change the Position, Rotation and Scale of an entity, at the click of a button.
+> - Once you've used the Tweaker to perfectly position your item, you can use the 'Log' button, which shall output the new Transform values of your entity, which can be simply carried over to your code.
+> - If you'd like to reset the entity's transform to it's original Transform state, simply hit the 'Revert' button.
 
 ![](https://pmacom.github.io/assets/dcldash/images/docs/dash-spacer-invis.png)
 
