@@ -34,6 +34,7 @@ export { Dash_Cache_VideoClip } from './cache/videoClip'
 export { Dash_Cache_VideoMaterial } from './cache/videoMaterial'
 export { Dash_Cache_VideoTexture } from './cache/videoTexture'
 export { Dash_Cache_GLTFShape } from './cache/gltfShape'
+export { Dash_OnFirstInteract } from './utils/OnFirstInteract'
 
 export { Dash_AdminMenu, Dash_Tweaker } from './ui/AdminMenu/AdminMenu'
 
@@ -66,5 +67,3 @@ export { Dash_Helpers_GetEntitiesWithComponent } from './helpers/helpers'
 export { Dash_UI_ImageRadioButton_Group } from './ui/ImageRadioButton/ImageRadioButtonGroup'
 export { Dash_UI_ImageRadioButton } from './ui/ImageRadioButton/ImageRadioButton'
 export { Dash_UI_ImageRadioButton_Settings, Dash_UI_ImageRadioButton_Group_Settings } from './ui/ImageRadioButton/interfaces'
-
-log('This is REALLY coming from a local update to the package')
