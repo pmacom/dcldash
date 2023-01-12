@@ -42,22 +42,45 @@ export const Dash_UI_Generate_StaticButton = (
     return image
 }
 
-export const Dash_UI_StaticImage = (
+export const Dash_UI_Icon = (
     parent: UIShape,
     texture: Texture,
     setting: Dash_UI_Image_Setting,
+    scale: number = 1
 ): UIImage => {
     let image = new UIImage(parent, texture)
     const { renderSettings, cropSettings } = setting
     const { vAlign, hAlign } = renderSettings
-    image.width = renderSettings.width
-    image.height = renderSettings.height
+    image.width = renderSettings.width*scale
+    image.height = renderSettings.height*scale
     image.sourceLeft = cropSettings.positionX
     image.sourceTop = cropSettings.positionY
     image.sourceWidth = cropSettings.width
     image.sourceHeight = cropSettings.height
-    image.positionX = renderSettings.positionX
-    image.positionY = renderSettings.positionY
+    image.positionX = renderSettings.positionX*scale
+    image.positionY = renderSettings.positionY*scale*-1
+    image.vAlign = vAlign ? vAlign : 'top'
+    image.hAlign = hAlign ? hAlign : "left"
+    return image
+}
+
+export const Dash_UI_StaticImage = (
+    parent: UIShape,
+    texture: Texture,
+    setting: Dash_UI_Image_Setting,
+    scale: number = 1
+): UIImage => {
+    let image = new UIImage(parent, texture)
+    const { renderSettings, cropSettings } = setting
+    const { vAlign, hAlign } = renderSettings
+    image.width = renderSettings.width*scale
+    image.height = renderSettings.height*scale
+    image.sourceLeft = cropSettings.positionX
+    image.sourceTop = cropSettings.positionY
+    image.sourceWidth = cropSettings.width
+    image.sourceHeight = cropSettings.height
+    image.positionX = renderSettings.positionX*scale
+    image.positionY = renderSettings.positionY*scale*-1
     image.vAlign = vAlign ? vAlign : 'top'
     image.hAlign = hAlign ? hAlign : "left"
     return image

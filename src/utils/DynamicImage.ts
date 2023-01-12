@@ -1,4 +1,6 @@
 import { Dash_OnUpdateFrame, Dash_OnUpdateFrame_Instance } from "../utils/OnUpdateFrame"
+import { Dash_Wait } from "./Wait"
+import { Dash_Ease } from "./Ease"
 
 declare const Map: any
 
@@ -18,10 +20,18 @@ interface IDynamicImageAction {
 export class DynamicImage {
     private animation: Dash_OnUpdateFrame_Instance
     private tweens: typeof Map = new Map()
+    private initialWidth: UIValue
+    private initialHeight: UIValue
+    private initialPositionX: UIValue
+    private initialPositionY: UIValue
     // private tweens: Map<string, IDynamicImageAction> = new Map()
 
     constructor(public image: UIImage){
         this.animation = Dash_OnUpdateFrame.add((dt: number) => this.update(dt))
+        this.initialHeight = new UIValue(image.width)
+        this.initialWidth = new UIValue(image.height)
+        this.initialPositionX = new UIValue(image.positionX)
+        this.initialPositionY = new UIValue(image.positionY)
     }
 
     fadeIn(
@@ -485,6 +495,59 @@ export class DynamicImage {
                 callback,
             }
         })
+        this.animation.start()
+    }
+
+    tick(
+        scale: number | string = 1.1,
+        duration: number = .5,
+        center: boolean = true,
+        ease?: (n: number) => number,
+        callback?: () => void
+    ){
+        if(!ease){ ease = Dash_Ease.easeOutBounce }
+        this.tweens.set('width', {
+            timer: 0,
+            settings: {
+                from: this.initialWidth.value * new UIValue(scale).value,
+                to: this.initialWidth.value,
+                duration: duration/2,
+                ease,
+                callback,
+            }
+        })
+        this.tweens.set('height', {
+            timer: 0,
+            settings: {
+                from: this.initialHeight.value * new UIValue(scale).value,
+                to: this.initialHeight.value,
+                duration: duration/2,
+                ease,
+                callback,
+            }
+        })
+        if(center){
+            this.tweens.set('positionX', {
+                timer: 0,
+                settings: {
+                    from: this.initialPositionX.value + (((this.initialWidth.value * new UIValue(scale).value) - this.initialWidth.value)*.5),
+                    to: this.initialWidth.value,
+                    duration: duration/2,
+                    ease,
+                    callback,
+                }
+            })
+            this.tweens.set('positionY', {
+                timer: 0,
+                settings: {
+                    from: this.initialPositionY.value + (((this.initialHeight.value * new UIValue(scale).value) - this.initialHeight.value)*.5),
+                    to: this.initialHeight.value,
+                    duration: duration/2,
+                    ease,
+                    callback,
+                }
+            })
+        }
         this.animation.start()
     }
 

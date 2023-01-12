@@ -25,8 +25,14 @@ class ZoneManagerInstance {
     // private zones: Map<string, Set<string>> = new Map()
     public currentZone: string = 'primaryZone'
     private parcelSize: Vector3 | undefined
+    private isInitialized: Boolean = false
 
-    constructor(){
+    constructor(){}
+
+    public init(){
+        if(this.isInitialized) return
+        this.isInitialized = true
+
         this.setupMessages()
 
         executeTask(async () => {
@@ -155,6 +161,7 @@ export class Dash_Zone extends Entity {
         private transform: Transform
     ){
         super()
+        ZoneManager.init()
         zones.set(zoneName, this)
         this.addComponent(transform)
 
