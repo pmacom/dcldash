@@ -340,16 +340,16 @@ export class Dash_BoxHighlight extends Entity {
      */
     show(){
         this.addComponentOrReplace(new BoxHighlightAnimation())
-        engine.addEntity(this)
-        engine.addSystem(AnimateBoxHighlightsInstance)
+        if(!this.isAddedToEngine()) engine.addEntity(this)
+        if(!AnimateBoxHighlightsInstance.system.active) engine.addSystem(AnimateBoxHighlightsInstance)
     }
 
     /**
      * Hides the boxHighlight
      */
     hide(){
-        this.removeComponent(BoxHighlightAnimation)
-        engine.removeEntity(this)
+        if(this.hasComponent(BoxHighlightAnimation)) this.removeComponent(BoxHighlightAnimation)
+        if(AnimateBoxHighlightsInstance.system.active) engine.removeEntity(this)
     }
 
     /**
@@ -387,7 +387,7 @@ const lerpUVs = (
 
 const BoxHighlights = engine.getComponentGroup(BoxHighlightAnimation)
 class AnimateBoxHighlights implements ISystem {
-    private system: ISystem = this
+    public system: ISystem = this
     update(dt: number) {
         if(!BoxHighlights.entities.length){
             if(this.system.active) engine.removeSystem(this.system)
