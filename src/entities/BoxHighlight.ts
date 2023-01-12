@@ -349,7 +349,7 @@ export class Dash_BoxHighlight extends Entity {
      */
     hide(){
         if(this.hasComponent(BoxHighlightAnimation)) this.removeComponent(BoxHighlightAnimation)
-        if(AnimateBoxHighlightsInstance.system.active) engine.removeEntity(this)
+        if(this.isAddedToEngine()) engine.removeEntity(this)
     }
 
     /**
